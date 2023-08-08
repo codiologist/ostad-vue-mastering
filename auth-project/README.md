@@ -1,8 +1,11 @@
 # Assignment Demo Link 
-https://assignment-vue3-carousel.netlify.app/
+https://vue3-firebase-auth.netlify.app/
 
 <br/>
 <br/>
+
+# Assignment Intro
+This auth project done with vue3 and firebase email/password authentication. Validation is done with cumputed properties no plugins used.
 
 
 ## Recommended IDE Setup
