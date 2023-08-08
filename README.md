@@ -26,7 +26,7 @@ cd auth-project
 npm install
 ```
 
-3. Run project by
+4. Run project by
 ```sh
 npm run dev
 ```
