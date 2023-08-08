@@ -7,7 +7,6 @@ https://vue3-firebase-auth.netlify.app/
 This auth project done with [VueJS3](https://vuejs.org/) and [Firebase](https://firebase.google.com/) email/password authentication. Validation is done with cumputed properties no plugins used.
 
 <br/>
-<br/>
 
 ## Installation
 
@@ -26,6 +25,8 @@ cd auth-project
 ```sh
 npm install
 ```
+
+<br/>
 
 
 ## Recommended IDE Setup
