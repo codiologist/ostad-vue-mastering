@@ -57,7 +57,8 @@ const isStrongPassword = computed(() => {
                             <h1 class="font-bold text-4xl text-indigo-600">LOGIN</h1>
                             <p class="mt-3 text-base font-semibold">Enter your credential to login</p>
                         </div>
-                        <div class="bg-indigo-100 border-solid border border-indigo-600 py-2 text-indigo-700 rounded-md text-center mb-10">
+                        <div
+                            class="bg-indigo-100 border-solid border border-indigo-600 py-2 text-indigo-700 rounded-md text-center mb-10">
                             <h4 class="font-medium">Test Login Credentials</h4>
                             <p class="text-[13px] font-semibold">Email: firoj@gmail.com / Pass: *Abcd123$</p>
                         </div>
@@ -105,16 +106,18 @@ const isStrongPassword = computed(() => {
                                         <div class="flex items-center mt-3">
                                             <i class="mdi mdi-information-outline text-indigo-400 text-2xl"></i>
                                             <p class="text-xs text-gray-500 font-semibold ml-2">
-                                                Minimum six characters, at least one uppercase letter, one lowercase letter, one number and one special character.
+                                                Minimum six characters, at least one uppercase letter, one lowercase letter,
+                                                one number and one special character.
                                             </p>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div v-if="errorMessage !== null" class="flex items-center justify-center text-center mb-5">
-                                    <span class="bg-red-600 text-white px-4 py-1 rounded-full"><i
-                                            class="mdi mdi-alert-circle-outline text-white text-lg"></i> {{ errorMessage
-                                            }}</span>
+                                    <span class="bg-red-600 text-white px-4 py-1 rounded-md">
+                                        <i class="mdi mdi-alert-circle-outline text-white text-lg"></i>
+                                        {{ errorMessage }}
+                                    </span>
                                 </div>
                                 <div class="flex -mx-3">
                                     <div class="w-full px-3 mb-5">

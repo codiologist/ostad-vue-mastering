@@ -9,6 +9,7 @@ import successBG from '@images/success-bg.png'
 
 const startValidation = ref(false);
 const refgistered = ref(false);
+const errorMessage = ref(null);
 
 const data = reactive({
   username: '',
@@ -33,8 +34,14 @@ const signUp = () => {
         refgistered.value = false
       }, 3500);
       startValidation.value = false;
-    }).catch((err) => { console.log(err.message); })
+    }).catch((error) => {
+      if (error) {
+        errorMessage.value = "This email already teaken"
+      }
+    })
   }
+  data.password = ''
+  data.confirmPassword = ''
 };
 
 // Custom Validation
@@ -69,7 +76,8 @@ const isPasswordConfirmed = computed(() => {
   <div class="w-screen h-screen bg-gray-900 flex items-center justify-center ">
     <div class="bg-gray-100 text-gray-500 shadow-xl w-full overflow-hidden">
       <div class="md:flex items-center w-full">
-        <div class="hidden h-screen md:flex items-center w-5/6 py-0 px-0" :class="refgistered ? 'bg-indigo-100' : 'bg-indigo-600'">
+        <div class="hidden h-screen md:flex items-center w-5/6 py-0 px-0"
+          :class="refgistered ? 'bg-indigo-100' : 'bg-indigo-600'">
           <img v-if="!refgistered" :src="signupBG" alt="background">
           <img v-if="refgistered" :src="successBG" alt="background">
         </div>
@@ -159,11 +167,18 @@ const isPasswordConfirmed = computed(() => {
                       class="text-red-500 text-sm font-semibold">Password not matched.</p>
                   </div>
                 </div>
+                <div v-if="errorMessage !== null" class="flex items-center justify-center text-center mb-5">
+                  <span class="bg-red-600 text-white px-4 py-1 rounded-md">
+                    <i class="mdi mdi-alert-circle-outline text-white text-lg"></i>
+                    {{ errorMessage }}
+                  </span>
+                </div>
                 <div class="flex -mx-3">
                   <div class="w-full px-3 mb-5">
                     <button
-                      class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">REGISTER
-                      NOW</button>
+                      class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+                      REGISTERNOW
+                    </button>
                   </div>
                 </div>
               </div>
