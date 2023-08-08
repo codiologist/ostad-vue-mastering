@@ -13,7 +13,7 @@ This auth project done with [VueJS3](https://vuejs.org/) and [Firebase](https://
 1. Clone the repo
 
 ```sh
-git clone https://github.com/codiologist/ostad-vue-mastering.git
+git clone --branch module-6 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
 2. Go to auth-project
