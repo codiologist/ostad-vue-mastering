@@ -21,9 +21,14 @@ git clone --branch module-6 https://github.com/codiologist/ostad-vue-mastering.g
 cd auth-project
 ```
 
-3. Go to auth-project
+3. Install packagees with
 ```sh
 npm install
+```
+
+3. Run project by
+```sh
+npm run dev
 ```
 
 <br/>
