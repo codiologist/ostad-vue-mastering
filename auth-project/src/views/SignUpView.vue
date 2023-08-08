@@ -31,7 +31,7 @@ const signUp = () => {
       setTimeout(() => {
         router.push('/')
         refgistered.value = false
-      }, 3000);
+      }, 3500);
       startValidation.value = false;
     }).catch((err) => { console.log(err.message); })
   }
@@ -74,12 +74,12 @@ const isPasswordConfirmed = computed(() => {
           <img v-if="refgistered" :src="successBG" alt="background">
         </div>
         <div class="w-full h-screen flex items-center md:w-4/6 xl:w-2/6 px-5 xl:px-10 2xl:px-20">
-          <!-- 👉  Success Message -->
+          <!-- 👉  Success Message  -->
           <div v-if="refgistered" class="w-full text-center">
             <div>
               <h1 class="font-bold text-4xl text-indigo-600 mb-4">Congratulations</h1>
               <h4 class="font-bold text-xl text-gray-600 mb-2">You are registered successfully.</h4>
-              <p class="text-red-600">Redirecting to profile...</p>
+              <p class="font-bold text-red-600">Redirecting to profile...</p>
             </div>
           </div>
 

@@ -57,6 +57,11 @@ const isStrongPassword = computed(() => {
                             <h1 class="font-bold text-4xl text-indigo-600">LOGIN</h1>
                             <p class="mt-3 text-base font-semibold">Enter your credential to login</p>
                         </div>
+                        <div class="bg-indigo-100 border-solid border border-indigo-600 py-2 text-indigo-700 rounded-md text-center mb-10">
+                            <h4 class="font-medium">Test Login Credentials</h4>
+                            <p class="text-[13px] font-semibold">Email: firoj@gmail.com / Pass: *Abcd123$</p>
+                        </div>
+
                         <!-- 👉 Login Form -->
                         <form @submit.prevent="login">
                             <div>
