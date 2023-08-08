@@ -29,6 +29,7 @@ const router = createRouter({
         requiresAuth: true
       }
     },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue'), },
   ]
 })
 
@@ -37,10 +38,10 @@ router.beforeEach(async (to) => {
   if (requiresAuth && !await getCurrentUser()) {
     return '/';
   }
-  
+
   if (!requiresAuth && await getCurrentUser()) {
     return '/profile';
-  }  
+  }
 })
 
 
