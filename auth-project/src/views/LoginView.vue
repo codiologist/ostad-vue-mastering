@@ -68,8 +68,8 @@ const isStrongPassword = computed(() => {
                             <div>
                                 <div class="flex -mx-3 ">
                                     <div class="w-full px-3 mb-5">
-                                        <label for="" class="text-base font-semibold px-1 text-indigo-600">Email</label>
-                                        <div class="flex mt-2">
+                                        <label for="" class="text-base font-semibold px-1 text-indigo-600">Email <sup class="text-red-500 -top-0 text-base">*</sup></label>
+                                        <div class="flex mt-1">
                                             <div
                                                 class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                 <i class="mdi mdi-email-outline text-gray-400 text-2xl"></i>
@@ -79,18 +79,18 @@ const isStrongPassword = computed(() => {
                                                 placeholder="name@mail.com">
                                         </div>
                                         <p v-if="startValidation && email == '' && !isValidEmail"
-                                            class="mt-1 ml-1 text-red-500 text-sm font-semibold">Type valid email</p>
+                                            class="mt-1 ml-1 text-red-500 text-sm font-semibold">Email is required.</p>
                                         <p v-else-if="startValidation && email != '' && !isValidEmail"
                                             class="mt-1 ml-1 text-red-500 text-sm font-semibold">
-                                            Email should in valid format.
+                                            Email should be in a valid format.
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="flex -mx-3">
                                     <div class="w-full px-3" :class="errorMessage !== null ? 'mb-8' : 'mb-12'">
-                                        <label for="" class="text-base font-semibold px-1 text-indigo-600">Password</label>
-                                        <div class="flex">
+                                        <label for="" class="text-base font-semibold px-1 text-indigo-600">Password <sup class="text-red-500 -top-0 text-base">*</sup></label>
+                                        <div class="flex mt-1">
                                             <div
                                                 class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                 <i class="mdi mdi-lock-outline text-gray-400 text-2xl"></i>
@@ -101,7 +101,7 @@ const isStrongPassword = computed(() => {
 
                                         </div>
                                         <p v-if="startValidation && password == '' && !isValidEmail"
-                                            class="mt-1 ml-1 text-red-500 text-sm font-semibold">Type Password</p>
+                                            class="mt-1 ml-1 text-red-500 text-sm font-semibold">Password is required.</p>
 
                                         <div class="flex items-center mt-3">
                                             <i class="mdi mdi-information-outline text-indigo-400 text-2xl"></i>

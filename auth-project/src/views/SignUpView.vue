@@ -101,8 +101,8 @@ const isPasswordConfirmed = computed(() => {
               <div>
                 <div class="flex -mx-3 ">
                   <div class="w-full px-3 mb-5">
-                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Name</label>
-                    <div class="flex mt-2">
+                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Name <sup class="text-red-500 -top-0 text-base">*</sup></label>
+                    <div class="flex mt-1">
                       <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                         <i class="mdi mdi-account-outline text-gray-400 text-2xl"></i>
                       </div>
@@ -116,7 +116,7 @@ const isPasswordConfirmed = computed(() => {
                 </div>
                 <div class="flex -mx-3 ">
                   <div class="w-full px-3 mb-5">
-                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Email</label>
+                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Email <sup class="text-red-500 -top-0 text-base">*</sup></label>
                     <div class="flex mt-2">
                       <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                         <i class="mdi mdi-email-outline text-gray-400 text-2xl"></i>
@@ -135,7 +135,7 @@ const isPasswordConfirmed = computed(() => {
                 </div>
                 <div class="flex -mx-3">
                   <div class="w-full px-3 mb-5">
-                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Password</label>
+                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Password <sup class="text-red-500 -top-0 text-base">*</sup></label>
                     <div class="flex">
                       <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                         <i class="mdi mdi-lock-outline text-gray-400 text-2xl"></i>
@@ -154,7 +154,7 @@ const isPasswordConfirmed = computed(() => {
                 </div>
                 <div class="flex -mx-3">
                   <div class="w-full px-3 mb-12">
-                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Confirm Password</label>
+                    <label for="" class="text-base font-semibold px-1 text-indigo-600">Confirm Password <sup class="text-red-500 -top-0 text-base">*</sup></label>
                     <div class="flex">
                       <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                         <i class="mdi mdi-lock-outline text-gray-400 text-2xl"></i>
