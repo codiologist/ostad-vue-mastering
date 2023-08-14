@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
 
                     </div>
                     <div class="text-center mb-4">
-                        <p class="text-sm text-red-600 font-bold">* All images and contents are teaken from <a
+                        <p class="text-sm text-red-600 font-bold">* All images and contents are taken from <a
                                 class="text-blue-500" href="https://beautifulbangladesh.gov.bd/"
                                 target="_blank">beautifulbangladesh.gov.bd</a></p>
                     </div>
