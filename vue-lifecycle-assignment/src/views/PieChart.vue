@@ -1,6 +1,6 @@
 <script setup >
 
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import PickColors from 'vue-pick-colors'
 
 // variables
@@ -9,6 +9,7 @@ const newData = ref({
     label: '',
     sliceBGColor: '#00cedf'
 })
+const chartRef = ref();
 let chart = null
 const dataset = [338.3, 67.5, 64.6, 1425.8,]
 const data = {
@@ -55,8 +56,7 @@ const config = {
 
 
 onMounted(() => {
-    const ctx = document.getElementById('chart')
-    chart = new Chart(ctx, config)
+    chart = new Chart(chartRef.value.id, config)
 })
 
 function updateChart() {
@@ -72,10 +72,7 @@ function updateChart() {
         "new_chart_data",
         JSON.stringify(data)
     )
-    // chart.destroy()
-    nextTick(function () {
-        chart = new Chart(ctx, config)
-    })
+
     chart.update()
 
     newData.value.label = ''
@@ -118,7 +115,7 @@ onBeforeUnmount(() => {
                     <h2 class="mb-3 xl:mb-8 text-center text-3xl xl:text-4xl text-indigo-500 font-bold uppercase">Population Chart</h2>
 
                     <div class="w-[350px] h-[400px] xl:w-[500px] xl:h-[500px] mx-auto">
-                        <canvas id="chart"></canvas>
+                        <canvas ref="chartRef" id="chart"></canvas>
                     </div>
                 </div>
                 <div class="w-full xl:w-2/6 ">
@@ -155,7 +152,7 @@ onBeforeUnmount(() => {
                         </div>
                         <div class="flex -mx-3 ">
                             <div class="w-full px-3 mb-3">
-                                <label for="" class="text-base font-semibold px-1 text-gray-600">Select Background Color
+                                <label for="" class="text-base font-semibold px-1 text-gray-600">Pick Slice Background Color
                                 </label>
                                 <div class=" mt-1">
                                     <div>
