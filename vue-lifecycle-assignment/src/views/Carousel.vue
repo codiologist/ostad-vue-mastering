@@ -40,9 +40,8 @@ const carouselConfig = {
     imagesLoaded: true
 }
 
-
+// Update the carousel as per form data
 function addNewitem() {
-
     historicalPlaces.value.push({ id: historicalPlaces.value.length + 1, ...newItem.value })
     localStorage.setItem(
         "historical_places",
@@ -54,7 +53,7 @@ function addNewitem() {
     })
 }
 
-
+// Setting and updating localStorage data
 if (localStorage.getItem("historical_places") === null) {
     localStorage.setItem(
         "historical_places",
@@ -70,6 +69,7 @@ onMounted(() => {
     carousel = new Flickity('#carousel', carouselConfig)
 });
 
+// Removing localStorage data and destroying carousel
 onBeforeUnmount(() => {
     carousel.destroy()
     localStorage.removeItem('historical_places')

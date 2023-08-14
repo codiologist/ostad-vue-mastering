@@ -20,7 +20,10 @@ Project done with [VueJS3](https://vuejs.org/), [Flickity](https://flickity.meta
 git clone --branch module-7 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
-2. Go to auth-project
+2. Go to directory
+```sh
+cd ostad-vue-mastering
+```
 ```sh
 cd vue-lifecycle-assignment
 ```

@@ -1,6 +1,6 @@
 <script setup >
 
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import PickColors from 'vue-pick-colors'
 
 // variables
@@ -10,6 +10,7 @@ const newData = ref({
     sliceBGColor: '#00cedf'
 })
 const chartRef = ref();
+const colorPickerRef = ref();
 let chart = null
 const dataset = [338.3, 67.5, 64.6, 1425.8,]
 const data = {
@@ -54,11 +55,12 @@ const config = {
     }
 };
 
-
+// Chart Initialization
 onMounted(() => {
     chart = new Chart(chartRef.value.id, config)
 })
 
+// Update the chart as per form data
 function updateChart() {
     dataset.push(newData.value.seriseValue)
     chart.data.labels.push(newData.value.label)
@@ -79,6 +81,7 @@ function updateChart() {
     newData.value.seriseValue = ''
 }
 
+// Setting and updating localStorage data
 if (localStorage.getItem("new_chart_dataset") === null && localStorage.getItem("new_chart_data") === null) {
     localStorage.setItem(
         "new_chart_dataset",
@@ -91,14 +94,13 @@ if (localStorage.getItem("new_chart_dataset") === null && localStorage.getItem("
 } else {
     let newChartDataset = JSON.parse(localStorage.getItem("new_chart_dataset"));
     let newChartData = JSON.parse(localStorage.getItem("new_chart_data"));
-    console.log(newChartData);
-    // newData.value = newChartDataset
     data.labels = newChartData.labels
     data.datasets[0].data = newChartDataset
     data.datasets[0].backgroundColor = newChartData.datasets[0].backgroundColor
 
 }
 
+// Removing localStorage data and destroying chart
 onBeforeUnmount(() => {
     chart.destroy()
     localStorage.removeItem('new_chart_dataset')
@@ -155,7 +157,7 @@ onBeforeUnmount(() => {
                                 <label for="" class="text-base font-semibold px-1 text-gray-600">Pick Slice Background Color
                                 </label>
                                 <div class=" mt-1">
-                                    <div>
+                                    <div ref="colorPickerRef">
                                         <PickColors v-model:value="newData.sliceBGColor" :size="50" theme="dark"
                                             format="rgb" show-alpha />
                                     </div>
