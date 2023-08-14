@@ -4,11 +4,11 @@ https://vue3-carousel-piechart-lifecycle.netlify.app/
 <br/>
 
 ## Assignment Intro
-This auth project done with [VueJS3](https://vuejs.org/), [Flickity](https://flickity.metafizzy.co/) and [Chart JS (Pie Chart)](https://www.chartjs.org/docs/latest/samples/other-charts/pie.html).
+Project done with [VueJS3](https://vuejs.org/), [Flickity](https://flickity.metafizzy.co/) and [Chart JS (Pie Chart)](https://www.chartjs.org/docs/latest/samples/other-charts/pie.html).
 <br/>
-1. In Task 1 (Carousel Component) you can add your favorite historical places with the form and place will added to the carousel. Also the newly added place will store in li localStorage. Switching to task 2 all localStorage data will removed and carolusel will destroyed befor unmount the component.
+1. <strong>In Task 1 (Carousel Component)</strong> you can add your favorite historical places with the form and place will added to the carousel. Also the newly added place will store in li localStorage. Switching to <strong>Task 2</strong> all localStorage data will removed and carolusel will destroyed before unmount the component.
 
-2. In Task 2 (Pie Chart Component) you can add any countries name and population with the form. Country name and population will reflect on the chart with pickable background color. Also the newly added data will store in the localStorage. Switching to task 2 all localStorage data will removed and chart will destroyed befor unmount the component.
+2. <strong>In Task 2 (Pie Chart Component)</strong> you can add any countries name and population with the form. Country name and population will reflect on the chart with pickable background color. Also the newly added data will store in the localStorage. Switching to <strong>Task 1</strong> all localStorage data will removed and chart will destroyed before unmount the component.
 
 <br/>
 
@@ -17,7 +17,7 @@ This auth project done with [VueJS3](https://vuejs.org/), [Flickity](https://fli
 1. Clone the repo
 
 ```sh
-git clone --branch module-6 https://github.com/codiologist/ostad-vue-mastering.git
+git clone --branch module-7 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
 2. Go to auth-project
