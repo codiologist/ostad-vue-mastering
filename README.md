@@ -4,7 +4,7 @@ https://vue3-props-emits.netlify.app/
 <br/>
 
 ## Assignment Intro
-1. In this application a message is passed form parent component to it's child component thorough props. In child component when you press "Generate Random Message" button an event is emitted and randomly generate a message form messages array for you and shown in parent component.
+1. In this application a message is passed form parent component to it's child component thorough props. In child component when you clcik "Show Message" button an event is emitted and a custom message is shown in parent component.
 
 <br/>
 
