@@ -6,8 +6,8 @@ const message = ref("🖐 Hello Vue Developers.")
 const receivedMessage = ref("");
 
 
-function handleMessageEmitted(message) {
-    receivedMessage.value = message;
+function handleMessageEmitted(customMessage) {
+    receivedMessage.value = customMessage;
 }
 
 </script>
@@ -25,7 +25,7 @@ function handleMessageEmitted(message) {
                 <h4 class=" font-bold text-2xl bg-cyan-100  px-8 py-2 rounded-full">{{receivedMessage}}</h4>
             </div>
             <div v-else>
-                <h4> <p class="font-medium mb-2">Press <span class="font-bold text-pink-600">"Generate Random Message"</span> button from <span class="font-bold text-red-500">Child Component</span></p></h4>
+                <h4> <p class="font-medium mb-2">Click <span class="font-bold text-pink-600">"Show Message"</span> button from <span class="font-bold text-red-500">Child Component</span></p></h4>
             </div>
         </div>
 

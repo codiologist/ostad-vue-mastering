@@ -18,7 +18,7 @@ const emit = defineEmits(['messageEmitted']);
             </div>
             <div class="mt-4">
                 <button type="text" class="mt-5 border-2 shadow-lg hover:shadow-xl border-pink-700 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-md"
-                    @click="$emit('messageEmitted', 'Vue 3 is awesome! 👌')">Generate Random Message</button>
+                    @click="$emit('messageEmitted', 'Vue 3 is awesome! 👌')">Show Message</button>
             </div>
         </div>
     </div>
