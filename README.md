@@ -13,7 +13,7 @@ https://vue3-props-emits.netlify.app/
 1. Clone the repo
 
 ```sh
-git clone --branch module-7 https://github.com/codiologist/ostad-vue-mastering.git
+git clone --branch module-8 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
 2. Go to directory
