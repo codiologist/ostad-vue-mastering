@@ -1,24 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-
 const props = defineProps(['message']);
 const emit = defineEmits(['messageEmitted']);
-
-// Variables
-const messages = [
-    "Vue 3 is awesome! 😃 ",
-    "Composition Api is a new blessings 😇 in Vue 3.",
-    "Happy coding with Vue 3 🙂 ",
-];
-
-const randomMessage = ref("");
-
-// Random message generator function
-const emitMessage = () => {
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    emit('messageEmitted', randomMessage.value = messages[randomIndex]);
-};
-
 </script>
 
 <template>
@@ -36,7 +18,7 @@ const emitMessage = () => {
             </div>
             <div class="mt-4">
                 <button type="text" class="mt-5 border-2 shadow-lg hover:shadow-xl border-pink-700 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-md"
-                    @click="emitMessage">Generate Random Message</button>
+                    @click="$emit('messageEmitted', 'Vue 3 is awesome! 👌')">Generate Random Message</button>
             </div>
         </div>
     </div>
