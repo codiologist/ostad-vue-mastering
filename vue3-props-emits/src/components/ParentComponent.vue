@@ -23,9 +23,6 @@ function handleMessageEmitted(message) {
         <div class="text-center border-2 border-cyan-500 px-8 py-6">
             <div v-if="receivedMessage">
                 <h4 class=" font-bold text-2xl bg-cyan-100  px-8 py-2 rounded-full">{{receivedMessage}}</h4>
-                <p class="mt-6 text-sm text-red-500 font-bold">
-                    * Sometimes same message is shown because of generated same random index. It's not a bug.
-                </p>
             </div>
             <div v-else>
                 <h4> <p class="font-medium mb-2">Press <span class="font-bold text-pink-600">"Generate Random Message"</span> button from <span class="font-bold text-red-500">Child Component</span></p></h4>
