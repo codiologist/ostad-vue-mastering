@@ -59,12 +59,12 @@ getPostDetails()
                     </div>
                 </div>
             </div>
-            <div v-else class="w-screen h-screen overflow-hidden flex items-center justify-center">
+            <div v-else class="lg:w-screen lg:h-screen overflow-hidden lg:flex items-center justify-center p-8 lg:p-0 pt-0">
                 <div
-                    class="lg:w-8/12 mx-auto border shadow-2xl shadow-indigo-700/25 border-indigo-500 rounded-xl mt-32 mb-8">
+                    class="lg:w-8/12 mx-auto border shadow-2xl shadow-indigo-700/25 border-indigo-500 rounded-xl mt-12 lg:mt-32 mb-12">
                     <div class="text-center p-12">
                         <h2 class="text-6xl mb-4">🥺</h2>
-                        <h2 class="text-4xl text-indigo-700 font-extrabold"> দুঃখিত পোস্টের তথ্য পাওয়া যায়নি </h2>
+                        <h2 class="text-2xl lg:text-4xl text-indigo-700 font-extrabold"> দুঃখিত পোস্টের তথ্য পাওয়া যায়নি </h2>
                         <button
                             class="inline-flex items-center bg-indigo-500 hover:bg-indigo-700 text-white text-base font-semibold px-8 py-2 pl-5 bg-darkBlue rounded-full mt-6"
                             @click="router.go(-1)">

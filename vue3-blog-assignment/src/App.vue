@@ -49,8 +49,8 @@ provide("postCategories", categories);
       </nav>
     </header>
     
-    <div class="min-h-[865px]">
-      <RouterView />
+    <div class="min-h-[400px] lg:min-h-[865px]">
+      <!-- <RouterView /> -->
 
     </div>
     <Footer/>
