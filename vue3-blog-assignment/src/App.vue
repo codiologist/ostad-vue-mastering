@@ -50,8 +50,7 @@ provide("postCategories", categories);
     </header>
     
     <div class="min-h-[400px] lg:min-h-[865px]">
-      <!-- <RouterView /> -->
-
+      <RouterView />
     </div>
     <Footer/>
   </div>
