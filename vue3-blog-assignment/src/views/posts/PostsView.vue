@@ -30,7 +30,7 @@ getLatestPost()
 <template>
   <div>
     <Overlay v-if="isLoading"/>
-    <div class="container mx-auto pt-32">
+    <div class="container mx-auto pt-12 lg:pt-32">
       <h2 class="text-center mb-8">
         <span
           class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-indigo-700 relative inline-block px-6 pt-3 pb-1">

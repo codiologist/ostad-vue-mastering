@@ -38,20 +38,20 @@ getPostDetails()
 
         <template v-if="!isLoading">
             <div v-if="postDetails != null">
-                <div class="w-full lg:w-8/12 mx-auto mt-20 mb-8">
-                    <div class="mt-28 mb-6">
+                <div class="w-full lg:w-8/12 mx-auto p-4 lg:p-0 mt-0 lg:mt-20 mb-8">
+                    <div class="mt-5 lg:mt-28 mb-6 text-center lg:text-left">
                         <button
                             class="inline-flex items-center bg-indigo-500 hover:bg-indigo-700 shadow-md shadow-indigo-700 text-white text-base font-semibold px-8 py-2 pl-3 bg-darkBlue rounded-full"
                             @click="router.go(-1)">
                             <IconArrowNarrowLeft class="inline-block mr-2" /> ফিরে যাই
                         </button>
                     </div>
-                    <div class="mb-12">
-                        <img class="w-full mx-auto shadow-2xl rounded-xl" :src="postDetails.img" :alt="postDetails.title">
+                    <div class="mb-0 lg:mb-12">
+                        <img class="w-full mx-auto shadow-2xl rounded-none lg:rounded-xl" :src="postDetails.img" :alt="postDetails.title">
                     </div>
 
-                    <div class="p-8 -mt-28 border drop-shadow-2xl bg-white rounded-xl relative m-8">
-                        <p class="mb-4 text-[18px] text-indigo-800 font-semibold inline-block">
+                    <div class="lg:m-8 p-6 lg:p-8 lg:-mt-28 border drop-shadow-2xl bg-white lg:rounded-xl relative">
+                        <p class="mb-4 text-xs lg:text-[18px] text-indigo-800 font-semibold inline-block">
                             পোস্টটি করা হয়েছে: {{ moment(postDetails.created_at).locale('bn-bd').format('LLLL') }}
                         </p>
                         <h2 class="my-4 text-xl lg:text-4xl text-indigo-700 font-bold">{{ postDetails.title }}</h2>
