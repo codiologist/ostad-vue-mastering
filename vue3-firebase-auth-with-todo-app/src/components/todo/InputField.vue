@@ -28,7 +28,7 @@ onMounted(() => {
       ref="input"        
         v-model="todo"
         type="text"
-        placeholder="Create a new todo..."
+        placeholder="Create a new task..."
         class="
           px-3
           py-5

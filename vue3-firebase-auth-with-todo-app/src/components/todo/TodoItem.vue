@@ -62,7 +62,7 @@ onMounted(() => {
                 </div>
             </div>
             <div v-else class="p-6 text-center">
-                <h1 class="text-2xl font-bold capitalize text-red-600">No todos availabel !!!</h1>
+                <h1 class="text-2xl font-bold capitalize text-red-600">No tasks availabel !!!</h1>
             </div>
         </div>
     </div>
