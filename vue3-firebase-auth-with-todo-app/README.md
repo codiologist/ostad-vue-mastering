@@ -16,9 +16,9 @@ This project done with [VueJS3](https://vuejs.org/) and [Firebase](https://fireb
 git clone --branch module-11 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
-2. Go to auth-project
+2. Go to project folder
 ```sh
-cd auth-project
+cd auth-vue3-firebase-auth-with-todo-app
 ```
 
 3. Install packagees with
