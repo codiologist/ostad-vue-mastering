@@ -19,6 +19,8 @@ git clone --branch module-11 https://github.com/codiologist/ostad-vue-mastering.
 2. Go to project folder
 ```sh
 cd ostad-vue-mastering
+```
+```sh
 cd vue3-firebase-auth-with-todo-app
 ```
 
