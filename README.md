@@ -1,5 +1,5 @@
 # Assignment Demo Link 
-https://vue3-firebase-app-auth-with-todo.netlify.app/todo-list
+https://vue3-firebase-app-auth-with-todo.netlify.app
 
 <br/>
 
