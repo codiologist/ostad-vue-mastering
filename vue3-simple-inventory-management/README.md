@@ -13,7 +13,7 @@ This project done with [VueJS3](https://vuejs.org/) and [Firebase](https://fireb
 1. Clone the repo
 
 ```sh
-git clone --branch module-11 https://github.com/codiologist/ostad-vue-mastering.git
+git clone --branch module-12 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
 2. Go to project folder
@@ -21,7 +21,7 @@ git clone --branch module-11 https://github.com/codiologist/ostad-vue-mastering.
 cd ostad-vue-mastering
 ```
 ```sh
-cd vue3-firebase-auth-with-todo-app
+cd vue3-simple-inventory-management
 ```
 
 3. Install packagees with

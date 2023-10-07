@@ -8,13 +8,6 @@ const productDetails = ref([]);
 const isLoading = ref(false);
 const route = useRoute();
 
-import BannerImage from "@/assets/images/hero-image-04.jpg"
-
-
-
-
-
-
 
 onBeforeMount(() => {
     const getProductDetails = async () => {
@@ -41,11 +34,7 @@ onBeforeMount(() => {
 
 <template>
     <div>
-        {{ route.params.id }}
         <div class="container mx-auto">
-
-
-
             <div class="-mx-5 flex flex-col justify-between pt-16 pb-24 lg:flex-row">
                 <div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row">
 

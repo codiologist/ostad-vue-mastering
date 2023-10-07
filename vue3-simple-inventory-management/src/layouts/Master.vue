@@ -8,7 +8,7 @@ import { RouterView } from 'vue-router';
         <router-view name="Sidebar"></router-view>
         <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
             <router-view name="Topbar" />
-            <main class="p-12">
+            <main>
                 <router-view></router-view>
             </main>
         </div>

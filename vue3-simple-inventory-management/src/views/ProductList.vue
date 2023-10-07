@@ -10,8 +10,7 @@ const allProducts = ref([]);
 const isLoading = ref(false);
 
 const headers = [
-
-    { text: "Image", value: "image", sortable: true },
+    { text: "Image", value: "image", sortable: true, },
     { text: "Name", value: "title" },
     { text: "Unit Price ($)", value: "price", sortable: true },
     { text: "Rating", value: "rating.rate", sortable: true },
@@ -43,7 +42,8 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div>
+    <div  class="p-12">
+        <h1 class="text-3xl font-bold mb-6">Product List</h1>
         <Vue3EasyDataTable :headers="headers" :items="allProducts" :rows-per-page="10" show-index alternating border-cell
             buttons-pagination>
             <template #item-image="{ image }">
@@ -62,4 +62,8 @@ onBeforeMount(() => {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.vue3-easy-data-table__header{
+    text-align: center !important;
+}
+</style>

@@ -31,15 +31,15 @@ import firebaseLogo from '@images/firebase-logo.svg';
                                 </RouterLink>
                             </li>
                             <li>
-                                <RouterLink to="/profile" class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-white duration-300 ease-in-out hover:text-black hover:bg-yellow-400">
-                                    <i class="text-xl mdi mdi-account-circle"></i>
-                                    Profile
-                                </RouterLink>
-                            </li>
-                            <li>
                                 <RouterLink to="/product-list" class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-white duration-300 ease-in-out hover:text-black hover:bg-yellow-400">
                                     <i class="text-xl mdi mdi-format-list-bulleted"></i>
                                     Product List
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <RouterLink to="/profile" class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-white duration-300 ease-in-out hover:text-black hover:bg-yellow-400">
+                                    <i class="text-xl mdi mdi-account-circle"></i>
+                                    Profile
                                 </RouterLink>
                             </li>
                             <!-- Menu Item Settings -->
