@@ -1,5 +1,5 @@
 # Assignment Demo Link 
-https://vue3-firebase-app-auth-with-todo.netlify.app
+https://vue3-simple-inventory-management.netlify.app/
 
 <br/>
 
