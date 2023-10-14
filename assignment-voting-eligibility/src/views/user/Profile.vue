@@ -6,6 +6,8 @@ import profileCardBG from '@images/cover-01.png'
 
 import moment from 'moment'
 
+const token = JSON.parse(localStorage.getItem('token'))
+
 
 const authStore = useAuthStore
 
@@ -21,19 +23,7 @@ const avatar_url = ref('')
 const bio = ref('')
 
 const eligibilityStatus = ref('');
-const birthDate = ref('');
 
-const calculatedBirthDate = computed(() => {
-  const currentYear = new Date().getFullYear();
-  const birthYear = currentYear - age.value;
-  return `${birthYear}-01-01`;
-});
-
-const calculatedAge = computed(() => {
-  const birthYear = new Date(birthDate.value).getFullYear();
-  const currentYear = new Date().getFullYear();
-  return currentYear - birthYear;
-});
 
 
 
@@ -43,13 +33,14 @@ async function getUserProfile() {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${authStore.user.token}`
+        'Authorization': `Bearer ${token}`
       }
     });
 
     if (response.ok) {
       const res = await response.json();
       userData.value = res;
+      localStorage.setItem('userData', JSON.stringify(res[0]));
     } else {
       // Handle error here, e.g., throw an exception or log the error.
       console.error('Failed to fetch user profile:', response.status, response.statusText);
@@ -63,6 +54,14 @@ getUserProfile()
 
 
 
+const computedAge = computed(() => {
+  return Number(moment(today.value).format('y')) - Number(moment(userData.value[0]?.date_of_birth).format('y'));
+});
+
+const computedBirthYear = computed(() => {
+  return Number(moment(today.value).format('y')) - computedAge.value;
+});
+
 
 const update = async () => {
   try {
@@ -70,13 +69,13 @@ const update = async () => {
       method: 'PATCH', /* or PATCH */
       headers: {
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${authStore.user.token}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         firstName: firstName.value.length == ' ' ? authStore.user.firstName : firstName.value,
         lastName: lastName.value.length == ' ' ? authStore.user.lastName : lastName.value,
-        age: age.value.length == ' ' ? authStore.user.age : age.value,
         date_of_birth: dob.value.length == ' ' ? authStore.user.date_of_birth : dob.value,
+        age: computedAge.value,
         avatar: avatar_url.value.length == ' ' ? authStore.user.avatar : avatar_url.value,
         bio: bio.value.length == ' ' ? authStore.user.bio : bio.value,
       })
@@ -86,7 +85,6 @@ const update = async () => {
       const data = await response.json();
       userData.value.firstName = data.firstName;
       userData.value.lastName = data.lastName;
-      userData.value.age = data.age;
       getUserProfile()
     } else {
       // Handle the case where the request was not successful
@@ -98,15 +96,15 @@ const update = async () => {
   }
 };
 
-const computedAge = computed(() => {
-  return Number(moment(today.value).format('y')) - userData.value[0].age;
-});
+
 
 </script>
 
 <template>
   <div>
     <main>
+
+      {{ age }}
 
       <Breadcrumb page-title="Profile" />
 
@@ -132,7 +130,8 @@ const computedAge = computed(() => {
                 <h3 class="mb-1.5 text-2xl font-medium text-black dark:text-white">
                   {{ userData[0]?.firstName }} {{ userData[0]?.lastName }}
                 </h3>
-                <p class="font-medium">Birth Year : {{computedAge}}</p>
+                <p class="font-medium">Birth Year : {{computedBirthYear}}</p>
+                <p class="font-medium">Age : {{computedAge}}</p>
                 <div class="mx-auto max-w-180">
                   <h4 class="font-medium text-black dark:text-white">
                     About Me
@@ -181,14 +180,14 @@ const computedAge = computed(() => {
                   <input type="text" v-model="dob"
                     class="w-full rounded-lg border-[1.5px] border-primary bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:bg-form-input" />
                 </div>
-
+<!-- 
                 <div>
                   <label class="mb-3 block font-medium text-sm text-black dark:text-white">
                     Age
                   </label>
                   <input type="text" v-model="age"
                     class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black" />
-                </div>
+                </div> -->
 
                 <div>
                   <label class="mb-3 block font-medium text-sm text-black dark:text-white">

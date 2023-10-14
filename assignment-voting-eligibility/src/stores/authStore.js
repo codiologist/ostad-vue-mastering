@@ -42,7 +42,7 @@ const useAuthStore = reactive({
         localStorage.removeItem('token')
         useAuthStore.isAuthenticated = false
         useAuthStore.user = null
-        localStorage.setItem('user', null)
+        localStorage.setItem('userData', null)
         router.push('/login' )
     }
 })
