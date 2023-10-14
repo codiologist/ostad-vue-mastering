@@ -1,10 +1,10 @@
 <script setup >
-// import loginBG from '@images/login-bg.png'
+import loginBG from '@images/login-bg.png'
 
 import { reactive } from 'vue';
-import { useAuthStore } from '../../stores/AuthStore';
+import  authStore  from '../../stores/AuthStore';
 
-const authStore = useAuthStore
+const auth = authStore()
 
 const credentials = reactive({
     username: '',
@@ -18,7 +18,7 @@ const credentials = reactive({
         <div class="bg-gray-100 text-gray-500 shadow-xl w-full overflow-hidden">
             <div class="md:flex w-full">
                 <div class="hidden h-screen  md:flex items-center w-5/6 bg-indigo-500 py-0 px-0">
-                    <!-- <img :src="loginBG" alt=""> -->
+                    <img :src="loginBG" alt="">
                 </div>
                 <div class="w-full h-screen flex items-center md:w-4/6 xl:w-2/6  px-5  xl:px-10 2xl:px-20">
                     <div class="w-full">
@@ -29,11 +29,11 @@ const credentials = reactive({
                         <div
                             class="bg-indigo-100 border-solid border border-indigo-600 py-2 text-indigo-700 rounded-md text-center mb-10">
                             <h4 class="font-medium">Demo Login Credentials</h4>
-                            <p class="text-[13px] font-semibold">Email: firoj@gmail.com  / Pass: Fiorj123</p>
+                            <p class="text-[13px] font-semibold">Email: firoj@gmail.com  / Pass: Firoj123</p>
                         </div>
 
                         <!-- 👉 Login Form -->
-                        <form @submit.prevent="authStore.login(credentials)">
+                        <form @submit.prevent="auth.login(credentials)">
                             <div>
                                 <div class="flex -mx-3 ">
                                     <div class="w-full px-3 mb-5">
@@ -53,7 +53,7 @@ const credentials = reactive({
                                 </div>
 
                                 <div class="flex -mx-3">
-                                    <div class="w-full px-3" :class="authStore.errorMessage !== null ? 'mb-8' : 'mb-12'">
+                                    <div class="w-full px-3" :class="auth.errorMessage !== null ? 'mb-8' : 'mb-12'">
                                         <label for="" class="text-base font-semibold px-1 text-indigo-600">Password <sup
                                                 class="text-red-500 -top-0 text-base">*</sup></label>
                                         <div class="flex mt-1">
@@ -69,11 +69,11 @@ const credentials = reactive({
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="authStore.errorMessage"
+                                <div v-if="auth.errorMessage"
                                     class="flex items-center justify-center mb-5 bg-red-600 text-white px-4 py-1 pr-5 rounded-md">
                                     <i class="material-symbols-outlined text-white text-2xl mr-2">error</i>
                                     <span>
-                                        {{ authStore.errorMessage }}
+                                        {{ auth.errorMessage }}
                                     </span>
                                 </div>
                                 <div class="flex -mx-3">

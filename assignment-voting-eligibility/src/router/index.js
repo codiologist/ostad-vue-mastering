@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Topbar from '../layouts/Topbar.vue'
 import Sidebar from '../layouts/Sidebar.vue'
 
-import { useAuthStore } from '../stores/authStore';
+import  authStore from '../stores/authStore';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,9 +41,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const auth = useAuthStore
-  console.log(auth.isAuthenticated);
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+  const auth = authStore()
+  // console.log(auth.isAuthenticated);
+  auth.isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
+  if (to.meta.requiresAuth && auth.isAuthenticated != true) {
     next('/login')
   } else {
     next()
