@@ -1,22 +1,51 @@
 <script setup >
 import { ref, onMounted, onBeforeMount } from 'vue'
 import { useProductStore } from '../../stores/ProductStore'
+import axios from 'axios'
 import SingleProduct from "./SingleProduct.vue";
-
+import LoaderPulse from '../loader/LoaderPulse.vue';
 const productStore = useProductStore()
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const tabs = ref(["Best Selling", "Latest Products"])
 const activeTab = ref("Best Selling")
 const product_items = ref([])
+const isLoading = ref(false)
+
 
 onBeforeMount(() => {
-  productStore.getProducts(1)
-  console.log(productStore.productsList.data);
-  setTimeout(() => {
-    product_items.value = productStore.productsList.data.filter(
-      (item) => item.best_selling
-    );
-  }, 1000);
+
+  const getProducts = async () => {
+    isLoading.value = true
+    try {
+      let url = `${API_BASE_URL}/products`
+      let response = await axios.get(url)
+      console.log(response);
+
+      product_items.value = response.data.data
+
+      product_items.value = response.data.data.filter(
+        (item) => item.best_selling
+      );
+
+
+      // console.log(productsList.value.data );
+        isLoading.value = false
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  getProducts()
+
+  // productStore.getProducts()
+  // console.log(productStore.productsList.data);
+  // setTimeout(() => {
+  //   product_items.value = productStore.productsList.data.filter(
+  //     (item) => item.best_selling
+  //   );
+  // }, 1000);
 });
 
 
@@ -25,12 +54,12 @@ onBeforeMount(() => {
 function handleTabProduct(value) {
   activeTab.value = value;
   if (value === "Best Selling") {
-    product_items.value = productStore.productsList.data.filter(
+    product_items.value = product_items.value.filter(
       (item) => item.best_selling
     );
   }
   if (value === "Latest Products") {
-    product_items.value = productStore.productsList.data.filter(
+    product_items.value = product_items.value.filter(
       (item) => item.latest
     );
   }
@@ -66,7 +95,8 @@ function handleTabProduct(value) {
       <div class="product__tab-wrapper">
         <div class="row">
           <div v-for="(item, i) in product_items" :key="i" class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-            <SingleProduct :item="item" />
+            <LoaderPulse v-if="isLoading" />
+            <SingleProduct v-if="product_items.length" :item="item" />
           </div>
           <!-- <template v-if="activeTab != 'All'">
             <div v-for="(item, i) in product_items" :key="i" class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
