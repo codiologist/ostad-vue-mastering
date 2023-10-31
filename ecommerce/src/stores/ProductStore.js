@@ -55,14 +55,12 @@ export const useProductStore = defineStore('products', () => {
   };
 
   const searchProduct = async (input) => {
-    productsList.value = []
+    searchedProductsList.value = []
     fetch(`${API_BASE_URL}/products/search?name=${input}`)
       .then(response => response.json())
       .then(async (response) => {
-        productsList.value = response.data;
+        searchedProductsList.value = response.data;
       });
-
-
   }
 
   return { getProducts, searchProduct, productsList, searchedProductsList, paginateData }

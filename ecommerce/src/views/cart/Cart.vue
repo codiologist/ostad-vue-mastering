@@ -1,6 +1,7 @@
 <script setup>
 
 import { cart } from "../../stores/Cart"
+import { authStore } from '../../stores/AuthStore'
 import SingleCartItem from "./SingleCartItem.vue";
 
 </script>
@@ -78,10 +79,11 @@ import SingleCartItem from "./SingleCartItem.vue";
                                     <ul class="mb-20">
                                         <li>Total <span> ৳ {{ cart.totalPrice }}</span></li>
                                     </ul>
-                                    <button @click="cart.checkout()"
+                                    <button v-if="authStore.isAuthenticated" @click="cart.checkout()"
                                         class="tw-ml-5 tw-bg-green-500 tw-hover:bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded">
                                         Place Order
                                     </button>
+                                    <h3 v-else class="tw-text-red-500">Please login to place order</h3>
                                 </div>
                             </div>
                         </div>

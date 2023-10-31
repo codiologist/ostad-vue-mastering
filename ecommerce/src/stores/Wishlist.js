@@ -1,6 +1,10 @@
 import { reactive } from 'vue'
 import { authStore } from '../stores/AuthStore'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+import { useToast } from 'vue-toastification';
+const toast = useToast();
+
 const wishlist = reactive({
     items: [],
     isWishListed(product) {
@@ -9,7 +13,7 @@ const wishlist = reactive({
     async fetchWishlist() {
         const apiUrl = `${API_BASE_URL}/wishlist`
         const token = authStore.getUserToken()
-        if(!token){
+        if (!token) {
             return
         }
         try {
@@ -42,13 +46,19 @@ const wishlist = reactive({
 
         if (!this.isWishListed(product)) {
             //add item to wishlist
-            this.items.push(product.id)
+            if (authStore.isAuthenticated) {
+                this.items.push(product.id)
+                toast.success('Product added to Wishlist !');
+            } else {
+                toast.error('Please login to add product to Wishlist !');
+            }
         } else {
             //remove item from wishlist
             this.items = this.items.filter(id => id != product.id)
             apiUrl = `${API_BASE_URL}/wishlist/${product.id}` //DELETE
             method = 'DELETE'
             payload = {}
+            toast.success('Product removed to Wishlist !');
         }
 
         try {
@@ -71,8 +81,9 @@ const wishlist = reactive({
             console.log(error);
         }
 
+
     },
-    
+
     toggleIconClass(product) {
         if (this.isWishListed(product)) {
             return 'fa-solid fa-heart'
@@ -80,7 +91,7 @@ const wishlist = reactive({
             return 'fa-regular fa-heart'
         }
     },
-    clearItems(){
+    clearItems() {
         console.log('clearing items')
         this.items = []
     }

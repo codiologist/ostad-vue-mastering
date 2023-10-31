@@ -5,6 +5,7 @@ import axios from "axios"
 import { useRoute } from "vue-router"
 import ProductDetailsArea from "../../../components/product-details/ProductDetailsArea.vue";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const route = useRoute()
 
 const item = ref({})
@@ -18,7 +19,7 @@ onBeforeMount(() => {
   const getSingleProduct = async () => {
     isLoading.value = true
     try {
-      let url = `http://localhost:8000/api/products/${route.params.id}`
+      let url = `${API_BASE_URL}/products/${route.params.id}`
       let response = await axios.get(url)
       console.log(response);
       item.value = response.data

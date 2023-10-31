@@ -1,9 +1,11 @@
 import { reactive } from 'vue'
 import { authStore } from './AuthStore'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const order = reactive({
     orders: [],
     async fetchOrders() {
-        const apiUrl = 'http://localhost:8000/api/orders'
+        const apiUrl = `${API_BASE_URL}/orders`
         const token = authStore.getUserToken()
 
         if (!token) {
@@ -42,7 +44,7 @@ const order = reactive({
         }
     },
     async placeOrder(totalPrice, items) {
-        const apiUrl = 'http://localhost:8000/api/orders'
+        const apiUrl = `${API_BASE_URL}/orders`
         const token = authStore.getUserToken()
         if (!token) {
             return

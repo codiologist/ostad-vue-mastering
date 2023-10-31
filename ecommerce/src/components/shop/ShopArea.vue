@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, provide, onBeforeMount, computed, watch} from 'vue'
+import { ref, reactive, provide, onBeforeMount, onUpdated, onBeforeUpdate, computed, watch } from 'vue'
 import { useProductStore } from '../../stores/ProductStore'
 
 import NiceSelect from '../select/NiceSelect.vue';
@@ -21,11 +21,12 @@ const props = defineProps({
 const productStore = useProductStore()
 const activeTab = ref({})
 const product_items = ref([])
+const searched_product_items = ref([])
 const isLoading = ref(false)
 
 
 
-onBeforeMount(() => {  
+onBeforeMount(() => {
   isLoading.value = true;
   productStore.getProducts()
   setTimeout(() => {
@@ -34,14 +35,17 @@ onBeforeMount(() => {
   }, 1000);
 });
 
+onBeforeUpdate(() => {
+  if (productStore.searchedProductsList.length > 0) {
+    product_items.value = productStore.searchedProductsList
+  }
+})
 
-
-
-function handleTabProduct(value) {
-  console.log(value);
+const handleTabProduct = (value) => {
   activeTab.value = value;
   if (value.value === "all") {
     product_items.value = productStore.productsList.data
+    searched_product_items.value = productStore.productsList.data
   }
   if (value.value == "best") {
     product_items.value = productStore.productsList.data.filter(
@@ -53,6 +57,12 @@ function handleTabProduct(value) {
       (item) => item.latest
     );
   }
+}
+
+
+const clearSearch = () =>{
+  productStore.searchedProductsList = []
+  product_items.value = productStore.productsList.data
 }
 
 
@@ -70,8 +80,8 @@ const getResults = async (page = 1) => {
 const ckb = ref()
 
 const checkedItems = reactive([
-  {id: 1, name: "apple", checked: false},
-  {id: 1, name: "samsung", checked: false},
+  { id: 1, name: "apple", checked: false },
+  { id: 1, name: "samsung", checked: false },
 ]);
 
 provide('checkedItems', checkedItems);
@@ -96,14 +106,13 @@ watch(product_items.value, (newVal, oldVal) => {
 
 
 <template>
-  
-  <section class="shop__area pb-60">    
+  <section class="shop__area pb-60">
     <div class="container">
       <div class="shop__top mb-50">
         <div class="row align-items-center">
           <div class="col-lg-6 col-md-5">
             <div class="shop__result">
-              <!-- <p>Showing 1–12 of 16 results</p> -->
+              <p>Showing {{ productStore.productsList.to }} –  {{ productStore.productsList.total }} results</p>
             </div>
           </div>
           <div class="col-lg-6 col-md-7">
@@ -153,32 +162,46 @@ watch(product_items.value, (newVal, oldVal) => {
                   ]" :default-current="0" name="Sort by latest" @onChange="handleTabProduct" />
                 </div>
               </div>
+              <div v-if="productStore.searchedProductsList != 0" class="tw-ml-6">
+                <button class="tp-btn-7" @click="clearSearch()">Clear Search</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="shop__main">
         <div class="row">
-          <div v-if="!right_side" class="col-lg-3">
+          <!-- <div v-if="!right_side" class="col-lg-3"> -->
 
-            {{ filteredcheckedItems }}
-            {{ ckb }}
+            <!-- {{ filteredcheckedItems }} -->
+            <!-- {{ ckb }} -->
             <!-- sidebar start -->
-            <shop-sidebar />
+            <!-- <shop-sidebar /> -->
             <!-- sidebar end -->
-          </div>
+          <!-- </div> -->
 
-          <div :class="`col-lg-9 ${right_side ? '' : 'order-first order-lg-last'}`">
+          <div :class="`col-lg-12 ${right_side ? '' : 'order-first order-lg-last'}`">
             <div class="shop__tab-content mb-40">
               <div class="tab-content" id="shop_tab_content">
                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
-                  <LoaderPluse v-if="isLoading" class="show-loader"/>
                   <!-- shop grid -->
-                  <div class="row">
-                    <div v-for="(item, i) in product_items" :key="i" class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                      <single-product :item="item" />
+                  <template v-if="productStore.searchedProductsList.length == 0">
+                    <LoaderPluse v-if="isLoading" class="show-loader" />
+                    <div class="row">
+                      <div v-for="(item, i) in product_items" :key="i" class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                        <single-product :item="item" />
+                      </div>
                     </div>
-                  </div>
+                  </template>
+                  <template v-if="productStore.searchedProductsList.length != 0">
+                    <LoaderPluse v-if="isLoading" class="show-loader" />
+                    <div class="row">
+                      <div v-for="(item, i) in productStore.searchedProductsList" :key="i"
+                        class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                        <single-product :item="item" />
+                      </div>
+                    </div>
+                  </template>
                 </div>
                 <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
                   <!-- shop list -->
@@ -239,12 +262,12 @@ watch(product_items.value, (newVal, oldVal) => {
 </template>
 
 <style>
-.show-loader{
+.show-loader {
   height: 25vh;
-    width: 100vh;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
