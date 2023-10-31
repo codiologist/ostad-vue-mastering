@@ -648,6 +648,7 @@ input[type=color] {
   box-shadow: none;
 }
 
+
 [dir=rtl] .nice-select {
   float: right;
   text-align: right !important;

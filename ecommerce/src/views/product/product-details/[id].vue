@@ -1,5 +1,6 @@
 <script setup>
-import { ref,  onBeforeMount } from "vue"
+import { ref, onBeforeMount } from "vue"
+import { RouterLink } from "vue-router"
 import axios from "axios"
 import { useRoute } from "vue-router"
 import ProductDetailsArea from "../../../components/product-details/ProductDetailsArea.vue";
@@ -38,7 +39,7 @@ onBeforeMount(() => {
     <section class="breadcrumb__area breadcrumb__style-9 pt-75 include-bg">
       <div class="container">
         <div class="row">
-          <div class="col-xxl-7"></div>
+          <div class="col-xxl-7">
             <div class="breadcrumb__content p-relative z-index-1">
               <div class="breadcrumb__list has-icon">
                 <span class="breadcrumb-icon">
@@ -48,18 +49,11 @@ onBeforeMount(() => {
                       fill="currentColor" />
                   </svg>
                 </span>
-                <span>
-                  <RouterLink to="">Home</RouterLink>
-                </span>
+                <span><RouterLink to="/">Home</RouterLink></span>
                 <span class="dvdr">
                   <i class="fa-regular fa-angle-right"></i>
                 </span>
-                <span>
-                  <RouterLink to="/products">Products</RouterLink>
-                </span>
-                <span class="dvdr">
-                  <i class="fa-regular fa-angle-right"></i>
-                </span>
+                <span><RouterLink to="/products">Shop</RouterLink></span>
                 <span class="dvdr">
                   <i class="fa-regular fa-angle-right"></i>
                 </span>
@@ -70,8 +64,8 @@ onBeforeMount(() => {
         </div>
       </div>
     </section>
-    <product-details-area :item="item" />
 
+    <product-details-area v-if="item" :item="item" />
     <!-- <product-details-tab-area /> -->
   </div>
 </template>

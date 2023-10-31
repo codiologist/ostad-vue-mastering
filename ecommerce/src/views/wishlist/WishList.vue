@@ -1,4 +1,40 @@
-<script lang="ts" setup>
+<script setup>
+import { ref, onBeforeMount, computed } from 'vue'
+import { RouterLink } from 'vue-router';
+import { wishlist } from '../../stores/Wishlist'
+import { useProductStore } from '../../stores/ProductStore'
+
+import SingleWishListtem from './SingleWishListtem.vue';
+
+const productStore = useProductStore()
+
+const wiisListItemsID = ref([])
+const products = ref([])
+const wishlistItems = ref([])
+
+onBeforeMount(() => {
+    wishlist.fetchWishlist()
+    productStore.getProducts()
+    setTimeout(() => {
+        wiisListItemsID.value = wishlist.items
+        products.value = productStore.productsList.data
+    }, 1000);
+
+});
+
+const ComputedWishList = computed(() => {
+    return products.value.filter((product) => {
+        return wiisListItemsID.value.includes(product.id)
+        // return product
+    })
+})
+
+
+console.log();
+
+
+
+
 
 </script>
 
@@ -28,9 +64,9 @@
                             <div class="table-content table-responsive">
                                 <div class="tp-continue-shopping">
                                     <p>
-                                        <nuxt-link href="/shop">
+                                        <RouterLink to="/products">
                                             Continue Shopping <i class="fal fa-reply"></i>
-                                        </nuxt-link>
+                                        </RouterLink>
                                     </p>
                                 </div>
                                 <table class="table">
@@ -39,20 +75,26 @@
                                             <th class="product-thumbnail">Images</th>
                                             <th class="cart-product-name">Product</th>
                                             <th class="product-price">Unit Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
-                                            <th class="product-remove">Remove</th>
+                                            <th class="product-remove">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <single-cart-item :img="cart_img_1" title="Level Bolt Smart Lock" price="130.00" />
+                                        <template v-for="product in ComputedWishList" :key="product.id">
+                                            <!-- {{ product }} -->
+                                            <SingleWishListtem  :productItem="product"/>
+                                        </template>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="tp-wishlist-btn mt-50">
-                                        <nuxt-link href="/cart" class="tp-btn tp-btn-black">Go to Cart</nuxt-link>
+                                    <div class="tw-flex">
+                                        <div class="tp-wishlist-btn mt-50 mr-20">
+                                            <RouterLink to="/cart" class="tp-btn tp-btn-black">Go to Cart</RouterLink>
+                                        </div>
+                                        <div class="tp-wishlist-btn mt-50">
+                                            <!-- <button type="button" @click="wishlist.clearItems()" class="tp-btn tp-btn-pink">Remove</button> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,83 +1,49 @@
 <script setup >
-import {ref, onMounted} from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 import { useProductStore } from '../../stores/ProductStore'
 import SingleProduct from "./SingleProduct.vue";
 
 const productStore = useProductStore()
 
 const tabs = ref(["Best Selling", "Latest Products"])
-const activeTab = ref("Top Rated")
-const item = ref({})
+const activeTab = ref("Best Selling")
+const product_items = ref([])
 
-// const filteredTasks = computed(() => {
-//     return state.status === 'all'
-//         ? todoStore.todoList
-//         : todoStore.todoList.filter((todoList) => todoList.status == state.status)
-// })
-
-onMounted(() => {
-  productStore.getProducts()
+onBeforeMount(() => {
+  productStore.getProducts(1)
+  console.log(productStore.productsList.data);
+  setTimeout(() => {
+    product_items.value = productStore.productsList.data.filter(
+      (item) => item.best_selling
+    );
+  }, 1000);
 });
 
 
 
-// handleTabProduct(value) {
-//       activeTab.value = value;
-//       if (value === "Top Rated") {
-//         this.product_items = this.productData.filter((item) => item.topRated);
-//       }
-//       if (value === "Best Selling") {
-//         this.product_items = this.productData.filter(
-//           (item) => item.bestSelling
-//         );
-//       }
-//       if (value === "Latest Products") {
-//         this.product_items = this.productData.filter(
-//           (item) => item.latestProduct
-//         );
-//       }
-//     }
 
+function handleTabProduct(value) {
+  activeTab.value = value;
+  if (value === "Best Selling") {
+    product_items.value = productStore.productsList.data.filter(
+      (item) => item.best_selling
+    );
+  }
+  if (value === "Latest Products") {
+    product_items.value = productStore.productsList.data.filter(
+      (item) => item.latest
+    );
+  }
+}
 
-
-
-// export default {
-//   components: { SingleProduct },
-
-//   data() {
-//     return {
-//       productData : productData,
-//       tabs: ["Top Rated", "Best Selling", "Latest Products"],
-//       activeTab: "Top Rated",
-//       product_items: [],
-//     };
-//   },
-//   methods: {
-//     handleTabProduct(value) {
-//       this.activeTab = value;
-//       if (value === "Top Rated") {
-//         this.product_items = this.productData.filter((item) => item.topRated);
-//       }
-//       if (value === "Best Selling") {
-//         this.product_items = this.productData.filter(
-//           (item) => item.bestSelling
-//         );
-//       }
-//       if (value === "Latest Products") {
-//         this.product_items = this.productData.filter(
-//           (item) => item.latestProduct
-//         );
-//       }
-//     },
-//   },
-//   created() {
-//     this.product_items = this.productData.filter((item) => item.topRated);
-//   },
-// };
 </script>
 
 <template>
   <section class="product__popular-area pt-60 pb-20">
+    <pre>
+      <!-- {{ productStore.productsList }} -->
+      <!-- {{ product_items }} -->
+    </pre>
     <div class="container">
       <div class="row align-items-end">
         <div class="col-xl-6 col-lg-6 col-md-6">
@@ -87,22 +53,9 @@ onMounted(() => {
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6">
           <div class="product__tab tp-tab mb-35">
-            <ul
-              class="nav nav-tabs justify-content-md-end"
-              id="productTab"
-              role="tablist"
-            >
-              <li
-                v-for="(tab, i) in tabs"
-                :key="i"
-                class="nav-item"
-                @click="handleTabProduct(tab)"
-              >
-                <button
-                  :class="`nav-link ${activeTab === tab ? 'active' : ''}`"
-                  id="top-tab"
-                  type="button"
-                >
+            <ul class="nav nav-tabs justify-content-md-end" id="productTab" role="tablist">
+              <li v-for="(tab, i) in tabs" :key="i" class="nav-item" @click="handleTabProduct(tab)">
+                <button :class="`nav-link ${activeTab === tab ? 'active' : ''}`" id="top-tab" type="button">
                   {{ tab }}
                 </button>
               </li>
@@ -112,13 +65,19 @@ onMounted(() => {
       </div>
       <div class="product__tab-wrapper">
         <div class="row">
-          <div
-            v-for="(item, i) in productStore.productsList"
-            :key="i"
-            class="col-xl-3 col-lg-4 col-md-6 col-sm-6"
-          >
-            <single-product :item="item" />
+          <div v-for="(item, i) in product_items" :key="i" class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <SingleProduct :item="item" />
           </div>
+          <!-- <template v-if="activeTab != 'All'">
+            <div v-for="(item, i) in product_items" :key="i" class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+              <SingleProduct :item="item" />
+            </div>
+          </template>
+          <template v-if="activeTab == 'All'">
+            <div v-for="(item, i) in productStore.productsList" :key="i" class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+              <SingleProduct :item="item" />
+            </div>
+          </template> -->
         </div>
       </div>
     </div>

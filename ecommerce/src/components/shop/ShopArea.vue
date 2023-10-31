@@ -1,73 +1,109 @@
 <script setup>
-import {ref, onMounted} from 'vue'
+import { ref, reactive, provide, onBeforeMount, computed, watch} from 'vue'
 import { useProductStore } from '../../stores/ProductStore'
 
-import productData from '../../mixins/productData';
 import NiceSelect from '../select/NiceSelect.vue';
-import ShopPagination from './ShopPagination.vue';
 import SingleListProduct from './SingleListProduct.vue';
 import SingleProduct from './SingleProduct.vue';
 import ShopSidebar from './ShopSidebar.vue';
+import LoaderPluse from '../loader/LoaderPulse.vue';
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 
 
 const props = defineProps({
-      right_side: {
-      type: Boolean,
-      default: false,
-    }
+  right_side: {
+    type: Boolean,
+    default: false,
+  }
 })
 
 
-
 const productStore = useProductStore()
+const activeTab = ref({})
+const product_items = ref([])
+const isLoading = ref(false)
 
-// const filteredTasks = computed(() => {
-//     return state.status === 'all'
-//         ? todoStore.todoList
-//         : todoStore.todoList.filter((todoList) => todoList.status == state.status)
-// })
 
-onMounted(() => {
+
+onBeforeMount(() => {  
+  isLoading.value = true;
   productStore.getProducts()
+  setTimeout(() => {
+    product_items.value = productStore.productsList.data
+    isLoading.value = false;
+  }, 1000);
 });
 
 
 
 
+function handleTabProduct(value) {
+  console.log(value);
+  activeTab.value = value;
+  if (value.value === "all") {
+    product_items.value = productStore.productsList.data
+  }
+  if (value.value == "best") {
+    product_items.value = productStore.productsList.data.filter(
+      (item) => item.best_selling
+    );
+  }
+  if (value.value == "latest") {
+    product_items.value = productStore.productsList.data.filter(
+      (item) => item.latest
+    );
+  }
+}
 
 
 
+const getResults = async (page = 1) => {
+  await productStore.getProducts(page);
+  product_items.value = productStore.productsList.data
+};
 
-function changeHandler(e) {
-      console.log(e);
-    }
+// const checkedItems = reactive({
+//   item1: false,
+//   item2: false,
+//   item3: false,
+// });
+const ckb = ref()
 
-// export default {
-//   components: { SingleProduct, SingleListProduct, ShopPagination, NiceSelect },
-//   mixins: [productData],
-//   props: {
-//     right_side: {
-//       type: Boolean,
-//       default: false,
-//     }
-//   },
-//   methods: {
-//     changeHandler(e) {
-//       console.log(e);
-//     },
-//   },
-// }
+const checkedItems = reactive([
+  {id: 1, name: "apple", checked: false},
+  {id: 1, name: "samsung", checked: false},
+]);
+
+provide('checkedItems', checkedItems);
+
+
+const filteredcheckedItems = computed(() => {
+  return checkedItems.filter((item) => item.checked);
+});
+
+filteredcheckedItems.value.forEach((item) => {
+  console.log(item);
+});
+
+
+watch(product_items.value, (newVal, oldVal) => {
+  console.log(newVal);
+  console.log(oldVal);
+});
+
+
 </script>
 
 
 <template>
-  <section class="shop__area pb-60">
+  
+  <section class="shop__area pb-60">    
     <div class="container">
       <div class="shop__top mb-50">
         <div class="row align-items-center">
           <div class="col-lg-6 col-md-5">
             <div class="shop__result">
-              <p>Showing 1–12 of 16 results</p>
+              <!-- <p>Showing 1–12 of 16 results</p> -->
             </div>
           </div>
           <div class="col-lg-6 col-md-7">
@@ -110,16 +146,11 @@ function changeHandler(e) {
               </div>
               <div class="shop__sort-item">
                 <div class="shop__sort-select">
-                  <nice-select
-                  :options="[
-                    { value: 'Sort by latest', text: 'Sort by latest' },
-                    { value: 'Sort by best selling', text: 'Sort by best selling' },
-                    { value: 'Sort by top week', text: 'Sort by top week' },
-                  ]" 
-                  :default-current="0" 
-                  name="Sort by latest" 
-                  @onChange="changeHandler" 
-                  />
+                  <nice-select :options="[
+                    { value: 'all', text: 'All' },
+                    { value: 'latest', text: 'Sort by latest' },
+                    { value: 'best', text: 'Sort by best selling' }
+                  ]" :default-current="0" name="Sort by latest" @onChange="handleTabProduct" />
                 </div>
               </div>
             </div>
@@ -129,6 +160,9 @@ function changeHandler(e) {
       <div class="shop__main">
         <div class="row">
           <div v-if="!right_side" class="col-lg-3">
+
+            {{ filteredcheckedItems }}
+            {{ ckb }}
             <!-- sidebar start -->
             <shop-sidebar />
             <!-- sidebar end -->
@@ -138,10 +172,10 @@ function changeHandler(e) {
             <div class="shop__tab-content mb-40">
               <div class="tab-content" id="shop_tab_content">
                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                  <LoaderPluse v-if="isLoading" class="show-loader"/>
                   <!-- shop grid -->
                   <div class="row">
-                    <div v-for="(item, i) in productStore.productsList.slice(0, 9)" :key="i"
-                      class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                    <div v-for="(item, i) in product_items" :key="i" class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                       <single-product :item="item" />
                     </div>
                   </div>
@@ -150,7 +184,7 @@ function changeHandler(e) {
                   <!-- shop list -->
                   <div class="product__list-wrapper mb-30">
                     <div class="row">
-                      <div v-for="(item, i) in productStore.productsList.slice(0, 5)" :key="i" class="col-lg-12 col-md-6">
+                      <div v-for="(item, i) in product_items" :key="i" class="col-lg-12 col-md-6">
                         <single-list-product :item="item" />
                       </div>
                     </div>
@@ -160,7 +194,33 @@ function changeHandler(e) {
               <!-- pagination -->
               <div class="row">
                 <div class="col-xxl-12">
-                  <shop-pagination />
+                  <!-- <shop-pagination /> -->
+                  <div class="tp-pagination tp-pagination-style-2">
+                    <Bootstrap5Pagination :data="productStore.productsList" @pagination-change-page="getResults">
+                      <template #prev-nav>
+                        <span>
+                          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.17749 10.105L1.62499 5.55248L6.17749 0.999981" stroke="currentColor"
+                              stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14.3767 5.55249L1.75421 5.55249" stroke="currentColor" stroke-width="1.5"
+                              stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          Prev
+                        </span>
+                      </template>
+                      <template #next-nav>
+                        <span>
+                          Next
+                          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.82422 1L14.3767 5.5525L9.82422 10.105" stroke="currentColor" stroke-width="1.5"
+                              stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M1.625 5.55249H14.2475" stroke="currentColor" stroke-width="1.5"
+                              stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                      </template>
+                    </Bootstrap5Pagination>
+                  </div>
                 </div>
               </div>
             </div>
@@ -177,3 +237,14 @@ function changeHandler(e) {
     </div>
   </section>
 </template>
+
+<style>
+.show-loader{
+  height: 25vh;
+    width: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>

@@ -1,3 +1,18 @@
+<script setup>
+import { ref, provide, reactive } from 'vue';
+import ShopWidgetCategory from "./filter/ShopWidgetCategory.vue";
+import ShopWidgetColor from "./filter/ShopWidgetColor.vue";
+import ShopWidgetModel from "./filter/ShopWidgetModel.vue";
+import ShopWidgetPrice from "./filter/ShopWidgetPrice.vue";
+
+const props = defineProps({
+  right_side:{
+      type:Boolean,
+      default:false,
+    }
+});
+</script>
+
 <template>
   <div :class="`shop__sidebar on-${right_side?'right':'left'}`">
     <div class="shop__widget tp-accordion">
@@ -23,16 +38,3 @@
   </div>
 </template>
 
-<script setup>
-import ShopWidgetCategory from "./filter/ShopWidgetCategory.vue";
-import ShopWidgetColor from "./filter/ShopWidgetColor.vue";
-import ShopWidgetModel from "./filter/ShopWidgetModel.vue";
-import ShopWidgetPrice from "./filter/ShopWidgetPrice.vue";
-
-const props = defineProps({
-  right_side:{
-      type:Boolean,
-      default:false,
-    }
-})
-</script>

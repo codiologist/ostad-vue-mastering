@@ -1280,12 +1280,14 @@
 	color: var(--tp-common-white);
 	font-family: var(--tp-ff-space);
 	text-transform: capitalize;
-	padding: 22px 36px 23px;
+	// padding: 22px 36px 23px;
+	padding: 12px 36px 13px;
 	background-color: var(--tp-theme-3);
 
-	&:hover{
-		color: var(--tp-common-black-5);
-		background-color: var(--tp-common-white);
+	&:hover,
+	&:focus{
+		color: #fff;
+		background-color: var(--tp-theme-1-dark);
 	}
 }
 

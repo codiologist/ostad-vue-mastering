@@ -424,6 +424,40 @@ input[type="color"] {
 			}
 		}
 	}
+	& ul.pagination{
+		li.page-item{
+			.page-link{
+				padding: 0;
+				border-radius: 0;
+			}
+			&:first-child{
+				.page-link{
+					border: none;
+					border-radius: none;
+				}
+			}
+			&:last-child{
+				.page-link{
+					border: none;
+				}
+			}
+			&.active{
+				.page-link{
+					background: var(--tp-theme-1);
+					border-color: var(--tp-theme-1);
+					color: var(--tp-common-white);
+					box-shadow: 0px 1px 2px rgba(3, 4, 28, 0.1);
+				}
+			}
+			&.pagination-prev-nav,
+			&.pagination-next-nav{
+				.page-link span{
+					padding: 0 20px;
+				}
+			}
+		}
+
+	}
 	&-style-2{
 		& ul{
 			& li{

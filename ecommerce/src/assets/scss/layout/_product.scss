@@ -426,6 +426,8 @@
             height: 38px;
             line-height: 38px;     
             background-color: #FFFFFF;
+            border: 1px solid #EAEAEF;
+            color: #F50963;
             box-shadow: 0px 1px 3px rgba(3, 4, 28, 0.12);
             text-align: center;
             position: relative;
@@ -518,7 +520,7 @@
                     text-align: center;
                     font-size: 18px;
                     color: var(--tp-common-black);
-                    border: 1px solid #DADCE0;
+                    border: 1px solid #F50963;
 
 
                     & .product-action-tooltip{

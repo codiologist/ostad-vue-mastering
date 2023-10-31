@@ -18,20 +18,8 @@
       <div class="col-xl-7 col-lg-7">
         <div class="product__list-content">
           <div class="product__rating product__rating-2 d-flex">
-            <span>
+            <span v-for="(count, index) in item?.rating" :key="index">
               <i class="icon_star"></i>
-            </span>
-            <span>
-              <i class="icon_star"></i>
-            </span>
-            <span>
-              <i class="icon_star"></i>
-            </span>
-            <span>
-              <i class="icon_star"></i>
-            </span>
-            <span>
-              <i class="icon_star_alt"></i>
             </span>
           </div>
 
@@ -43,7 +31,7 @@
           <div class="product__list-price">
             <span class="product__list-ammount">${{ item.price }}</span>
           </div>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.…</p>
+          <p>{{ item.description.substring(0,200) }}...</p>
 
           <div class="product__list-action d-flex flex-wrap align-items-center">
             <button type="button" class="product-add-cart-btn product-add-cart-btn-2">
@@ -80,7 +68,8 @@
               </svg>
               <span class="product-action-tooltip">Add To Wishlist</span>
             </button>
-            <button type="button" class="product-action-btn" data-bs-toggle="modal" :data-bs-target="`#productModalList-${item.id}`">
+            <button type="button" class="product-action-btn" data-bs-toggle="modal"
+              :data-bs-target="`#productModalList-${item.id}`">
               <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M9.49943 5.34978C8.23592 5.34978 7.20896 6.37595 7.20896 7.63732C7.20896 8.89774 8.23592 9.92296 9.49943 9.92296C10.7629 9.92296 11.7908 8.89774 11.7908 7.63732C11.7908 6.37595 10.7629 5.34978 9.49943 5.34978M9.49941 11.3456C7.45025 11.3456 5.78394 9.68213 5.78394 7.63738C5.78394 5.59169 7.45025 3.92725 9.49941 3.92725C11.5486 3.92725 13.2158 5.59169 13.2158 7.63738C13.2158 9.68213 11.5486 11.3456 9.49941 11.3456"
@@ -112,7 +101,7 @@
   </div>
 
   <!-- product modal start -->
-  <product-modal :item="item" :modal_id="`productModalList-${item.id}`"/>
+  <product-modal :item="item" :modal_id="`productModalList-${item.id}`" />
   <!-- product modal end -->
 </template>
 
@@ -121,7 +110,7 @@ import ProductModal from '../common/modals/ProductModal.vue';
 import SalScrollAnimationMixin from '../../mixins/SalScrollAnimationMixin';
 
 export default {
-  mixins:[SalScrollAnimationMixin],
+  mixins: [SalScrollAnimationMixin],
   components: { ProductModal },
   props: {
     item: {},

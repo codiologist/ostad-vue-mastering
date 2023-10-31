@@ -27,16 +27,32 @@ const router = createRouter({
       path: '/wishlist',
       name: 'wishlist',
       component: () => import('../views/wishlist/WishList.vue')
-    },    {
+    },
+    {
       path: '/checkout',
       name: 'checkout',
       component: () => import('../views/checkout/Checkout.vue')
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('../views/AboutView.vue')
-    // }
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('../views/checkout/Checkout.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/auth/login.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/auth/register.vue')
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/cart/Cart.vue')
+    }
   ]
 })
 
