@@ -25,11 +25,6 @@ onBeforeMount(() => {
 
       product_items.value = response.data.data
 
-      product_items.value = response.data.data.filter(
-        (item) => item.best_selling
-      );
-
-
       // console.log(productsList.value.data );
         isLoading.value = false
 
@@ -38,14 +33,6 @@ onBeforeMount(() => {
     }
   };
   getProducts()
-
-  // productStore.getProducts()
-  // console.log(productStore.productsList.data);
-  // setTimeout(() => {
-  //   product_items.value = productStore.productsList.data.filter(
-  //     (item) => item.best_selling
-  //   );
-  // }, 1000);
 });
 
 
@@ -71,7 +58,7 @@ function handleTabProduct(value) {
   <section class="product__popular-area pt-60 pb-20">
     <pre>
       <!-- {{ productStore.productsList }} -->
-      <!-- {{ product_items }} -->
+      {{ product_items }}
     </pre>
     <div class="container">
       <div class="row align-items-end">
