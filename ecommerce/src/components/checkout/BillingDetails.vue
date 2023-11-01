@@ -2,12 +2,7 @@
 import { authStore } from '../../stores/authStore';
 const auth = authStore
 
-const credentials = ref({
-  username: '',
-  email: '',
-  password: '',
-  address: '',
-});
+
 
 </script>
 

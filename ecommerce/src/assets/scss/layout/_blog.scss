@@ -863,7 +863,7 @@
             @media #{$lg, $md, $sm}{
                 padding: 40px 30px;
                 @include rtl{
-                    adding: 40px 30px;
+                    padding: 40px 30px;
                 }
             }
 
