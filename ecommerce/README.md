@@ -13,7 +13,7 @@ Full featured ecommerce site build with [VUE 3](https://code.visualstudio.com/) 
 1. Clone the repo
 
 ```sh
-git clone --branch module-12 https://github.com/codiologist/ostad-vue-mastering.git
+git clone --branch module-14 https://github.com/codiologist/ostad-vue-mastering.git
 ```
 
 2. Go to project folder
