@@ -28,68 +28,75 @@ import SingleCartItem from "./SingleCartItem.vue";
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="table-content table-responsive">
-                            <div class="tp-continue-shopping">
-                                <p>
-                                    <RouterLink to="/products">
-                                        Continue Shopping
-                                        <i class="fal fa-reply"></i>
-                                    </RouterLink>
-                                </p>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="product-thumbnail">Images</th>
-                                        <th class="cart-product-name">Product</th>
-                                        <th class="product-price">Unit Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template v-for="(product, index) in cart.items" :key="index">
-                                        <!-- {{ product }} -->
-                                        <SingleCartItem :productItem="product" />
-                                    </template>
-                                </tbody>
-                            </table>
+                        <div class="tp-continue-shopping">
+                            <p>
+                                <RouterLink to="/products">
+                                    Continue Shopping
+                                    <i class="fal fa-reply"></i>
+                                </RouterLink>
+                            </p>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="coupon-all">
-                                    <div class="coupon2">
-                                        <button @click="cart.saveCartInLocalStorage()" class="tp-btn-7 tp-btn-green tw-pt-[13px] tw-pb-[16px] "
-                                            name="update_cart" type="submit">
-                                            Update cart
-                                        </button>
-                                        <button @click="cart.emptyCart()" class="tp-btn-7 ml-20" name="update_cart"
-                                            type="submit">
-                                            Clear Cart
-                                        </button>
+                        <template v-if="cart.totalCartItems != 0">
+                            <div class="table-content table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Images</th>
+                                            <th class="cart-product-name">Product</th>
+                                            <th class="product-price">Unit Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template v-for="(product, index) in cart.items" :key="index">
+                                            <!-- {{ product }} -->
+                                            <SingleCartItem :productItem="product" />
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="coupon-all">
+                                        <div class="coupon2">
+                                            <button @click="cart.saveCartInLocalStorage()"
+                                                class="tp-btn-7 tp-btn-green tw-pt-[13px] tw-pb-[16px] " name="update_cart"
+                                                type="submit">
+                                                Update cart
+                                            </button>
+                                            <button @click="cart.emptyCart()" class="tp-btn-7 ml-20" name="update_cart"
+                                                type="submit">
+                                                Clear Cart
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-md-5 mr-auto">
-                                <div class="cart-page-total">
-                                    <h2>Cart totals</h2>
-                                    <ul class="mb-20">
-                                        <li>Total <span> ৳ {{ cart.totalPrice }}</span></li>
-                                    </ul>
-                                    <!-- {{ cart.totalCartItems }} -->
-                                    <div class="tw-mt-16 tw-text-right">
+                            <div class="row justify-content-end">
+                                <div class="col-md-5 mr-auto">
+                                    <div class="cart-page-total">
+                                        <h2>Cart totals</h2>
+                                        <ul class="mb-20">
+                                            <li>Total <span> ৳ {{ cart.totalPrice }}</span></li>
+                                        </ul>
+                                        <!-- {{ cart.totalCartItems }} -->
+                                        <div class="tw-mt-16 tw-text-right">
 
-                                        <RouterLink class="tp-btn-5" to="/checkout" v-if="authStore.isAuthenticated && cart.totalCartItems != 0" >
-                                            Check Out
-                                        </RouterLink>
-                                        <h3 v-if="!authStore.isAuthenticated" class="tw-text-red-500">Please login to place order</h3>
+                                            <RouterLink class="tp-btn-5" to="/checkout"
+                                                v-if="authStore.isAuthenticated && cart.totalCartItems != 0">
+                                                Check Out
+                                            </RouterLink>
+                                            <h3 v-if="!authStore.isAuthenticated" class="tw-text-red-500">Please login to
+                                                place
+                                                order</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
+                        <div v-else><h2 class="text-center tw-text-rose-700">Cart Is Empty !!! </h2></div>
                     </div>
                 </div>
             </div>

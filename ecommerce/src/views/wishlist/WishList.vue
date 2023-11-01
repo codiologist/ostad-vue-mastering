@@ -10,11 +10,10 @@ const productStore = useProductStore()
 
 const wiisListItemsID = ref([])
 const products = ref([])
-const wishlistItems = ref([])
 
 onBeforeMount(() => {
     wishlist.fetchWishlist()
-    productStore.getProducts()
+    productStore.getProducts(1)
     setTimeout(() => {
         wiisListItemsID.value = wishlist.items
         products.value = productStore.productsList.data
@@ -54,15 +53,15 @@ const computedWishlistItems = computed(() => {
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#">
+                        <div class="tp-continue-shopping">
+                            <p>
+                                <RouterLink to="/products">
+                                    Continue Shopping <i class="fal fa-reply"></i>
+                                </RouterLink>
+                            </p>
+                        </div>
+                        <template v-if="wishlist.items.length != 0">
                             <div class="table-content table-responsive">
-                                <div class="tp-continue-shopping">
-                                    <p>
-                                        <RouterLink to="/products">
-                                            Continue Shopping <i class="fal fa-reply"></i>
-                                        </RouterLink>
-                                    </p>
-                                </div>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -75,7 +74,7 @@ const computedWishlistItems = computed(() => {
                                     <tbody>
                                         <template v-for="product in computedWishlistItems" :key="product.id">
                                             <!-- {{ product }} -->
-                                            <SingleWishListtem  :productItem="product"/>
+                                            <SingleWishListtem :productItem="product" />
                                         </template>
                                     </tbody>
                                 </table>
@@ -92,7 +91,9 @@ const computedWishlistItems = computed(() => {
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </template>
+                        <div v-else><h2 class="text-center tw-text-rose-700">Wishlist Is Empty !!! </h2></div>
+
                     </div>
                 </div>
             </div>

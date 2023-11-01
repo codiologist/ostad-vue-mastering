@@ -61,9 +61,14 @@ const authStore = reactive({
         wishlist.items = []
         router.push('/login')
     },
-    getUserToken(){
-        return authStore.user.token
+    getUserToken() {
+        if (authStore.user && authStore.user.token) {
+            return authStore.user.token;
+        } else {
+            return null; // or handle the case when the user or token is not available
+        }
     }
+    
 })
 
 export { authStore }

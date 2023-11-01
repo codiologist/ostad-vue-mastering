@@ -1,4 +1,4 @@
-<script  setup>
+<script setup>
 import CouponArea from '../../components/checkout/CouponArea.vue';
 import CheckoutArea from '../../components/checkout/CheckoutArea.vue';
 </script>
@@ -21,8 +21,6 @@ import CheckoutArea from '../../components/checkout/CheckoutArea.vue';
                 </div>
             </div>
         </section>
-        <CouponArea />
         <CheckoutArea />
-
     </div>
 </template>

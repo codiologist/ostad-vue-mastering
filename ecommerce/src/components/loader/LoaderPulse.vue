@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="tw-text-center tw-mb-20">
         <div class="lds-ripple">
             <div></div>
             <div></div>
@@ -15,8 +15,9 @@
 .lds-ripple {
     display: inline-block;
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
 }
 
 .lds-ripple div {
@@ -33,24 +34,24 @@
 
 @keyframes lds-ripple {
     0% {
-        top: 60px;
-        left: 60px;
+        top: 100px;
+        left: 100px;
         width: 0;
         height: 0;
         opacity: 0;
     }
 
     4.9% {
-        top: 60px;
-        left: 60px;
+        top: 100px;
+        left: 100px;
         width: 0;
         height: 0;
         opacity: 0;
     }
 
     5% {
-        top: 60px;
-        left: 60px;
+        top: 100px;
+        left: 100px;
         width: 0;
         height: 0;
         opacity: 1;
@@ -59,8 +60,8 @@
     100% {
         top: 0px;
         left: 0px;
-        width: 120px;
-        height: 120px;
+        width: 200px;
+        height: 200px;
         opacity: 0;
     }
 }</style>

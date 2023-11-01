@@ -19,16 +19,15 @@ const props = defineProps({
 
 
 const productStore = useProductStore()
-const activeTab = ref({})
+const activeTab = ref({value: 'all', text: 'All'})
 const product_items = ref([])
-const searched_product_items = ref([])
 const isLoading = ref(false)
 
 
 
 onBeforeMount(() => {
   isLoading.value = true;
-  productStore.getProducts()
+  productStore.getProducts(1)
   setTimeout(() => {
     product_items.value = productStore.productsList.data
     isLoading.value = false;
@@ -43,21 +42,32 @@ onBeforeUpdate(() => {
 
 const handleTabProduct = (value) => {
   activeTab.value = value;
+  console.log(value);
   if (value.value === "all") {
-    alert("All")
     product_items.value = productStore.productsList.data
     // searched_product_items.value = productStore.productsList.data
   }
-  if (value.value == "best") {
-    product_items.value = productStore.productsList.data.filter(
-      (item) => item.best_selling
-    );
 
+  if (value.value == "best") {
+    let filtered_product_items = productStore.productsList.data.filter(
+      (item) => {
+        if(item.best_selling == "1"){
+          return item
+        }
+      }
+    );    
+    product_items.value = filtered_product_items
   }
+
   if (value.value == "latest") {
-    product_items.value = productStore.productsList.data.filter(
-      (item) => item.latest
-    );
+     let filtered_product_items = productStore.productsList.data.filter(
+      (item) => {
+        if(item.latest == "1"){
+          return item
+        }
+      }
+    );    
+    product_items.value = filtered_product_items
   }
 }
 
@@ -73,35 +83,6 @@ const getResults = async (page = 1) => {
   await productStore.getProducts(page);
   product_items.value = productStore.productsList.data
 };
-
-// const checkedItems = reactive({
-//   item1: false,
-//   item2: false,
-//   item3: false,
-// });
-const ckb = ref()
-
-const checkedItems = reactive([
-  { id: 1, name: "apple", checked: false },
-  { id: 1, name: "samsung", checked: false },
-]);
-
-provide('checkedItems', checkedItems);
-
-
-const filteredcheckedItems = computed(() => {
-  return checkedItems.filter((item) => item.checked);
-});
-
-filteredcheckedItems.value.forEach((item) => {
-  console.log(item);
-});
-
-
-watch(product_items.value, (newVal, oldVal) => {
-  console.log(newVal);
-  console.log(oldVal);
-});
 
 
 </script>
@@ -187,15 +168,15 @@ watch(product_items.value, (newVal, oldVal) => {
               <div class="tab-content" id="shop_tab_content">
                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                   <!-- shop grid -->
-                  <!-- <template v-if="productStore.searchedProductsList.length == 0"> -->
+                  <template v-if="productStore.searchedProductsList.length == 0">
                     <LoaderPluse v-if="isLoading" class="show-loader" />
                     <div class="row">
                       <div v-for="(item, i) in product_items" :key="i" class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                         <single-product :item="item" />
                       </div>
                     </div>
-                  <!-- </template> -->
-                  <!-- <template v-if="productStore.searchedProductsList.length != 0">
+                  </template>
+                  <template v-if="productStore.searchedProductsList.length != 0">
                     <LoaderPluse v-if="isLoading" class="show-loader" />
                     <div class="row">
                       <div v-for="(item, i) in productStore.searchedProductsList" :key="i"
@@ -203,7 +184,7 @@ watch(product_items.value, (newVal, oldVal) => {
                         <single-product :item="item" />
                       </div>
                     </div>
-                  </template> -->
+                  </template>
                 </div>
                 <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
                   <!-- shop list -->
@@ -220,7 +201,7 @@ watch(product_items.value, (newVal, oldVal) => {
               <div class="row">
                 <div class="col-xxl-12">
                   <!-- <shop-pagination /> -->
-                  <div class="tp-pagination tp-pagination-style-2">
+                  <div v-if="activeTab.value == 'all'" class="tp-pagination tp-pagination-style-2">
                     <Bootstrap5Pagination :data="productStore.productsList" @pagination-change-page="getResults">
                       <template #prev-nav>
                         <span>
@@ -262,14 +243,3 @@ watch(product_items.value, (newVal, oldVal) => {
     </div>
   </section>
 </template>
-
-<style>
-.show-loader {
-  height: 25vh;
-  width: 100vh;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>

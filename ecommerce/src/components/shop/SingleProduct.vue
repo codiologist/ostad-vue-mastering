@@ -1,27 +1,38 @@
 
 <script setup>
-import { onBeforeMount , onMounted } from 'vue';
+import { onBeforeMount, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import sal from 'sal.js'
 // import ProductModal from '../common/modals/ProductModal.vue';
 import { cart } from '../../stores/Cart'
+import { authStore } from '../../stores/AuthStore'
+import { useProductStore } from '../../stores/ProductStore'
 import { wishlist } from '../../stores/Wishlist'
+
+
+import { useToast } from 'vue-toastification';
+const toast = useToast();
 
 const props = defineProps({
   item: {},
 });
+const productStore = useProductStore()
 
 onBeforeMount(() => {
+  productStore.getProducts(1)
   wishlist.fetchWishlist()
 })
 
-onMounted(() =>{
+onMounted(() => {
   sal({
     threshold: 0.1,
     once: true
-        });
+  });
 });
 
+const handleAuth = () => {
+  toast.info('Please login to add product in Wishlist !');
+}
 
 </script>
 
@@ -40,8 +51,12 @@ onMounted(() =>{
       </div>
 
       <div class="product__action d-flex flex-column flex-wrap">
-        <button @click="wishlist.toggleWishlist(item)" class="product-action-btn">
+        <button v-if="authStore.isAuthenticated" @click="wishlist.toggleWishlist(item)" class="product-action-btn">
           <i class="tw-text-[20px]" :class="wishlist.toggleIconClass(item)"></i>
+          <span class="product-action-tooltip">Add To Wishlist</span>
+        </button>
+        <button v-else @click="handleAuth()" class="product-action-btn">
+          <i class="fa-regular fa-heart tw-text-[20px]"></i>
           <span class="product-action-tooltip">Add To Wishlist</span>
         </button>
       </div>
@@ -53,7 +68,7 @@ onMounted(() =>{
     </div>
     <div class="product__content">
       <div class="product__rating d-flex">
-        <span v-for="(count, index) in item?.rating" :key="index">
+        <span v-for="(count, index) in Number(item.rating)" :key="index">
           <i class="icon_star"></i>
         </span>
       </div>

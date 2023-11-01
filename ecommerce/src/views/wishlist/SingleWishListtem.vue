@@ -1,4 +1,5 @@
 <script setup>
+import { cart } from "../../stores/Cart";
 const props = defineProps({
     productItem: {
         type: Object

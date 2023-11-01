@@ -2,7 +2,7 @@
 
 import { ref, provide } from 'vue';
 import { useProductStore } from '../stores/ProductStore'
-
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   show: {
@@ -15,6 +15,7 @@ const emit = defineEmits(['hideModal']);
 
 const searchItemInput = ref('');
 const productStore = useProductStore()
+const router = useRouter()
 
 
 const hideModal = () => {
@@ -24,8 +25,9 @@ const hideModal = () => {
 
 const handleSearch = (value) => {
   productStore.searchProduct(value)
+  router.push('/products')
+  searchItemInput.value = ''
   hideModal()
-  console.log(value);
 };
 
 </script>

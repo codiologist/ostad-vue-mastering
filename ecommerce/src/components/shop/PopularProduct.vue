@@ -23,11 +23,13 @@ onBeforeMount(() => {
       let response = await axios.get(url)
       console.log(response);
 
-      product_items.value = response.data.data
+      response.data.data.filter(item => {
+        if (item.best_selling == "1") {
+          product_items.value.push(item)
+        }
+      })
 
-      // console.log(productsList.value.data );
-        isLoading.value = false
-
+      isLoading.value = false
     } catch (error) {
       console.log(error.message);
     }
@@ -41,14 +43,24 @@ onBeforeMount(() => {
 function handleTabProduct(value) {
   activeTab.value = value;
   if (value === "Best Selling") {
-    product_items.value = product_items.value.filter(
-      (item) => item.best_selling
+    let filtered_product_items = productStore.productsList.data.filter(
+      (item) => {
+        if (item.best_selling == "1") {
+          return item
+        }
+      }
     );
+    product_items.value = filtered_product_items
   }
   if (value === "Latest Products") {
-    product_items.value = product_items.value.filter(
-      (item) => item.latest
-    );
+    let filtered_product_items = productStore.productsList.data.filter(
+      (item) => {
+        if(item.latest == "1"){
+          return item
+        }
+      }
+    );    
+    product_items.value = filtered_product_items
   }
 }
 

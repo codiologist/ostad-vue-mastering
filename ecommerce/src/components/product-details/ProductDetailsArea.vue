@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { cart } from '../../stores/Cart'
 import { wishlist } from '../../stores/Wishlist'
 
@@ -37,7 +37,7 @@ function handleActiveImg(image) {
               <nav>
                 <div class="nav nav-tabs justify-content-sm-between">
                   <!-- {{ item.gallery[0] }} -->
-                  <button v-for="(item, i) in item?.gallery" :key="i"
+                  <button v-for="(item, i) in item.gallery" :key="i"
                     :class="`nav-link ${item.image === active_img ? 'active' : ''}`" @click="handleActiveImg(item.image)">
                     <!-- {{ item.image }} -->
                     <img :src="item.image" alt="image" style="width: 110px; height: 110px;" />

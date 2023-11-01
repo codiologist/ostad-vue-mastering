@@ -58,6 +58,7 @@ const order = reactive({
 
         const payload = {
             total_amount: totalPrice,
+            // shipping_address: shipping_address,
             products: products
         }
 

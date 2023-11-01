@@ -15,8 +15,6 @@ const handleOrderPlaced = () => {
 
 <template>
     <div class="your-order mb-30 ">
-        <!-- {{ cart }} -->
-        <h3>Your order</h3>
         <div class="your-order-table table-responsive">
             <table>
                 <thead>
