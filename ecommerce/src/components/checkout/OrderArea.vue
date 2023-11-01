@@ -9,7 +9,7 @@ const router = useRouter()
 const handleOrderPlaced = () => {
     cart.checkout()
     cart.emptyCart()
-    router.push('/order')
+    router.push('/orders')
 };
 </script>
 
