@@ -52,6 +52,7 @@ function handleDecrement() {
         <td class="product-remove">
             <button @click="cart.removeItem(productItem.product)"><i class="fa fa-times"></i></button>
         </td>
+
     </tr>
 </template>
   

@@ -1,24 +1,9 @@
 <script setup>
-import {ref} from 'vue'
-import { cart } from "../../stores/Cart"
-import { wishlist } from "../../stores/Wishlist"
 const props = defineProps({
     productItem: {
         type: Object
     }
 });
-
-
-// function handleIncrement() {
-//     props.productItem.quantity = props.productItem.quantity + 1
-// }
-// function handleDecrement() {
-//     if (props.productItem.quantity > 1) {
-//         props.productItem.quantity = props.productItem.quantity - 1
-//     }
-// }
-
-
 
 </script>
 

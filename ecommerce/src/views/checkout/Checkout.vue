@@ -21,9 +21,8 @@ import CheckoutArea from '../../components/checkout/CheckoutArea.vue';
                 </div>
             </div>
         </section>
-        <CouponArea/>
-        <CheckoutArea/>
+        <CouponArea />
+        <CheckoutArea />
 
     </div>
-    
 </template>

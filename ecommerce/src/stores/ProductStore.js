@@ -52,7 +52,7 @@ export const useProductStore = defineStore('products', () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }
 
   const searchProduct = async (input) => {
     searchedProductsList.value = []

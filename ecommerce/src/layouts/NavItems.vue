@@ -22,8 +22,8 @@ import router from '../router/index'
         </li>
 
         <li>
-            <RouterLink to="/products">
-                Contact
+            <RouterLink to="/orders">
+                Order
             </RouterLink>
         </li>
 

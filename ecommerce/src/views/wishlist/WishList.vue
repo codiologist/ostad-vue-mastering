@@ -22,19 +22,13 @@ onBeforeMount(() => {
 
 });
 
-const ComputedWishList = computed(() => {
-    return products.value.filter((product) => {
-        return wiisListItemsID.value.includes(product.id)
-        // return product
-    })
-})
-
-
-console.log();
-
-
-
-
+const computedWishlistItems = computed(() => {
+    // You can perform any logic here to filter or transform your wishlist items
+    return wiisListItemsID.value.map(wishlistItemId => {
+        // Assuming you want to find the corresponding product for each wishlist item
+        return products.value.find(product => product.id == wishlistItemId)
+    });
+});
 
 </script>
 
@@ -79,7 +73,7 @@ console.log();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="product in ComputedWishList" :key="product.id">
+                                        <template v-for="product in computedWishlistItems" :key="product.id">
                                             <!-- {{ product }} -->
                                             <SingleWishListtem  :productItem="product"/>
                                         </template>

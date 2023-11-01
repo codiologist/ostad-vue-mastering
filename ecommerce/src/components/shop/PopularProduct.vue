@@ -58,7 +58,7 @@ function handleTabProduct(value) {
   <section class="product__popular-area pt-60 pb-20">
     <pre>
       <!-- {{ productStore.productsList }} -->
-      {{ product_items }}
+      <!-- {{ product_items }} -->
     </pre>
     <div class="container">
       <div class="row align-items-end">

@@ -44,13 +44,15 @@ onBeforeUpdate(() => {
 const handleTabProduct = (value) => {
   activeTab.value = value;
   if (value.value === "all") {
+    alert("All")
     product_items.value = productStore.productsList.data
-    searched_product_items.value = productStore.productsList.data
+    // searched_product_items.value = productStore.productsList.data
   }
   if (value.value == "best") {
     product_items.value = productStore.productsList.data.filter(
       (item) => item.best_selling
     );
+
   }
   if (value.value == "latest") {
     product_items.value = productStore.productsList.data.filter(
@@ -185,15 +187,15 @@ watch(product_items.value, (newVal, oldVal) => {
               <div class="tab-content" id="shop_tab_content">
                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                   <!-- shop grid -->
-                  <template v-if="productStore.searchedProductsList.length == 0">
+                  <!-- <template v-if="productStore.searchedProductsList.length == 0"> -->
                     <LoaderPluse v-if="isLoading" class="show-loader" />
                     <div class="row">
                       <div v-for="(item, i) in product_items" :key="i" class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                         <single-product :item="item" />
                       </div>
                     </div>
-                  </template>
-                  <template v-if="productStore.searchedProductsList.length != 0">
+                  <!-- </template> -->
+                  <!-- <template v-if="productStore.searchedProductsList.length != 0">
                     <LoaderPluse v-if="isLoading" class="show-loader" />
                     <div class="row">
                       <div v-for="(item, i) in productStore.searchedProductsList" :key="i"
@@ -201,7 +203,7 @@ watch(product_items.value, (newVal, oldVal) => {
                         <single-product :item="item" />
                       </div>
                     </div>
-                  </template>
+                  </template> -->
                 </div>
                 <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
                   <!-- shop list -->

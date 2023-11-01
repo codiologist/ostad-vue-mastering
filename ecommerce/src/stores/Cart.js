@@ -1,5 +1,10 @@
 import {reactive, computed} from 'vue'
 import {order} from './Order'
+
+
+import { useToast } from 'vue-toastification';
+const toast = useToast();
+
 const cart = reactive({
     items:{},
     totalCartItems:computed(()=>{
@@ -28,6 +33,7 @@ const cart = reactive({
             }
         }
         cart.saveCartInLocalStorage()
+        toast.success('Product added to Cart !');
     },
     removeItem(product){
         if(this.items[product.id]){
@@ -37,10 +43,12 @@ const cart = reactive({
             }
         }
         cart.saveCartInLocalStorage()
+        toast.success('Product removed !');
     },
     emptyCart(){
         this.items = {}
         cart.saveCartInLocalStorage()
+        toast.success('Cart cleared !');
     },
     saveCartInLocalStorage(){
         localStorage.setItem('cart', JSON.stringify(this.items))
@@ -51,6 +59,7 @@ const cart = reactive({
     },
     checkout(){
         order.placeOrder(this.totalPrice, this.items)
+        toast.success('Order placed !');
     }
 })
 cart.getCartFromLocalStorage();

@@ -60,7 +60,7 @@ import SingleCartItem from "./SingleCartItem.vue";
                             <div class="col-12">
                                 <div class="coupon-all">
                                     <div class="coupon2">
-                                        <button @click="cart.saveCartInLocalStorage()" class="tp-btn-1 tp-btn-black"
+                                        <button @click="cart.saveCartInLocalStorage()" class="tp-btn-7 tp-btn-green tw-pt-[13px] tw-pb-[16px] "
                                             name="update_cart" type="submit">
                                             Update cart
                                         </button>
@@ -79,16 +79,17 @@ import SingleCartItem from "./SingleCartItem.vue";
                                     <ul class="mb-20">
                                         <li>Total <span> ৳ {{ cart.totalPrice }}</span></li>
                                     </ul>
-                                    <button v-if="authStore.isAuthenticated" @click="cart.checkout()"
-                                        class="tw-ml-5 tw-bg-green-500 tw-hover:bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded">
-                                        Place Order
-                                    </button>
-                                    <h3 v-else class="tw-text-red-500">Please login to place order</h3>
+                                    <!-- {{ cart.totalCartItems }} -->
+                                    <div class="tw-mt-16 tw-text-right">
+
+                                        <RouterLink class="tp-btn-5" to="/checkout" v-if="authStore.isAuthenticated && cart.totalCartItems != 0" >
+                                            Check Out
+                                        </RouterLink>
+                                        <h3 v-if="!authStore.isAuthenticated" class="tw-text-red-500">Please login to place order</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
