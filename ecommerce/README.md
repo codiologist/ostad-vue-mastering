@@ -1,35 +1,49 @@
-# ecommerce
+# Assignment Demo Link 
+Trendy Shop Ecommerce
 
-This template should help get you started developing with Vue 3 in Vite.
+<br/>
 
-## Recommended IDE Setup
+## Assignment Intro
+Full featured ecommerce site build with [VUE 3](https://code.visualstudio.com/) and [Laravel 9](https://laravel.com/docs/9.x/)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<br/>
 
-## Customize configuration
+## Installation
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+1. Clone the repo
 
-## Project Setup
+```sh
+git clone --branch module-12 https://github.com/codiologist/ostad-vue-mastering.git
+```
 
+2. Go to project folder
+```sh
+cd ostad-vue-mastering
+```
+```sh
+cd ecommerce
+```
+
+3. Install packagees with
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
+4. Run project by
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
-
+4. Build
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+<br/>
 
-```sh
-npm run lint
-```
+
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [ES Lint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
